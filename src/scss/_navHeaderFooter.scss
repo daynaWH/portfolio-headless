@@ -1,0 +1,139 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.logo {
+    height: 2rem;
+}
+
+.site-header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 1rem 3rem;
+    background-color: $bg-color-light;
+    box-shadow: $accent-blue 0px 1px 10px 5px;
+}
+
+.nav-links {
+    position: fixed;
+    bottom: -100%;
+    right: -100%;
+    transition: all 0.8s cubic-bezier(0.41, 0.18, 0.49, 0.96);
+    background-color: $secondary-color;
+
+    li {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .show & {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin: 0;
+        bottom: -2.5rem;
+        right: -20%;
+        padding: 4rem 10rem 8rem 6rem;
+        border-radius: 50%;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 5px;
+            left: -10px;
+            border: 2px solid $accent-blue;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        li {
+            opacity: 1;
+            transform: translateY(0);
+
+            &:nth-child(1) {
+                transition-delay: 0.4s;
+            }
+            &:nth-child(2) {
+                transition-delay: 0.6s;
+            }
+            &:nth-child(3) {
+                transition-delay: 0.8s;
+            }
+        }
+    }
+
+    @include mq-large($tablet) {
+        position: static;
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        background-color: transparent;
+        transition: none;
+
+        li {
+            opacity: 1;
+            transform: translateY(0);
+            transition: none;
+        }
+    }
+
+    a {
+        display: inline-block;
+        position: relative;
+    }
+
+    a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 0.25rem;
+        bottom: -0.25rem;
+        left: 0;
+        background-color: $accent-coral;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-out;
+    }
+
+    a:hover::after {
+        transform: scaleX(1);
+    }
+}
+
+// Footer
+
+footer {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include mq-small($mobileLarge) {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    img {
+        height: 1.5rem;
+    }
+}
+
+.social-icons a {
+    margin: 0 0.5rem;
+
+    #{$link-hover-selector} {
+        filter: opacity(0.5);
+    }
+}

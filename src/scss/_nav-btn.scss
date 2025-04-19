@@ -1,0 +1,65 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.nav-btn {
+    height: 1.5rem;
+    width: 2rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 2rem;
+    right: 3rem;
+
+    @include mq-large($tablet) {
+        display: none;
+    }
+
+    .nav-line {
+        position: absolute;
+        height: 0.25rem;
+        border-radius: 0.25rem;
+        background-color: $primary-color;
+        transition: all 0.2s ease-in-out;
+
+        &:nth-child(1) {
+            width: 60%;
+            top: 0;
+            left: 0;
+        }
+
+        &:nth-child(2) {
+            width: 100%;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        &:nth-child(3) {
+            width: 75%;
+            top: 100%;
+            right: 0;
+            transform: translateY(-100%);
+        }
+
+        // Upon toggle
+        .show &:nth-child(1) {
+            width: 70%;
+            transform: rotate(0) translate(3px, 18px);
+            transition-delay: 0.2s;
+        }
+
+        .show &:nth-child(2) {
+            transform: rotate(45deg);
+            right: 1.5px;
+            top: 8px;
+            transition-delay: 0.2s;
+        }
+
+        .show &:nth-child(3) {
+            width: 70%;
+            transform: rotate(-90deg) translate(16px, 4px);
+            transition-delay: 0.2s;
+        }
+    }
+}

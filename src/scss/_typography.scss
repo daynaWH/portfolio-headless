@@ -1,0 +1,45 @@
+@use "variables" as *;
+
+body,
+button,
+textarea {
+    font-family: $body-font;
+    color: $primary-color;
+    font-size: 1.125rem;
+    line-height: $line-height;
+}
+
+h1,
+h2,
+.nav-links a {
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.copyright {
+    font-size: 1rem;
+}
+
+/*--------------------------------------------------------------
+Links
+--------------------------------------------------------------*/
+a {
+    color: #0e1b2f;
+    text-decoration: none;
+
+    #{$link-hover-selector} {
+        color: $primary-color-lower-opacity;
+    }
+}
+
+.nav-links a,
+footer p {
+    font-weight: 500;
+}

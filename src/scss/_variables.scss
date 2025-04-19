@@ -1,0 +1,20 @@
+// Typography
+$body-font: "Raleway", sans-serif;
+$line-height: 1.5;
+
+// Colors
+$bg-color-light: #f7f7f7;
+$bg-color-dark: #05090f;
+$primary-color: #0e1b2f;
+$primary-color-lower-opacity: #0e1b2fbf;
+$secondary-color: #ccd6d4;
+$accent-blue: #99b4bf;
+$accent-coral: #f29979;
+
+// Media Query Breakpoints
+$mobileLarge: 30em;
+$tablet: 48em;
+$laptop: 64em;
+
+// Utility variables
+$link-hover-selector: "&:hover, &:active, &:focus";
