@@ -4,11 +4,13 @@ import Loading from "./Loading";
 import { restBase } from "./Utilities";
 import FeaturedImage from "./FeaturedImage";
 import Toolkit from "./Toolkit";
+import chevronRight from "../assets/chevron-right.svg";
 
-const OtherProjects = ({ ids }) => {
+function OtherProjects({ ids }) {
     const restPath = restBase + `posts?include=${ids.join(",")}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,38 +26,52 @@ const OtherProjects = ({ ids }) => {
         fetchData();
     }, [restPath]);
 
+    function handleMouseEnter() {
+        setIsHovering(true);
+    }
+
+    function handleMouseLeave() {
+        setIsHovering(false);
+    }
+
     return (
         <>
             {isLoaded ? (
-                <section className="related-projects">
-                    {restData.map((post) => (
-                        <article key={post.id} id={`post-${post.id}`}>
-                            {post.featured_media !== 0 && post._embedded && (
-                                <FeaturedImage
-                                    featuredImageObject={
-                                        post._embedded["wp:featuredmedia"][0]
-                                    }
-                                />
-                            )}
+                restData.map((post) => (
+                    <article key={post.id} id={`post-${post.id}`}>
+                        {post.featured_media !== 0 && post._embedded && (
+                            <FeaturedImage
+                                featuredImageObject={
+                                    post._embedded["wp:featuredmedia"][0]
+                                }
+                            />
+                        )}
+                        <div className="work-basic-info">
                             <h3>{post.title.rendered}</h3>
                             <p>{post.acf["project_subheading"]}</p>
-                            <div>
+                            <div className="toolkit">
                                 {post.acf["toolkit"].map((id) => (
                                     <Toolkit ids={[id]} key={id} />
                                 ))}
                             </div>
 
                             <Link to={`/blog/${post.slug}`}>
-                                <button>More Info</button>
+                                <button
+                                    className="more-info-btn"
+                                    onMouseEnter={handleMouseEnter}
+                                    onMouseLeave={handleMouseLeave}
+                                >
+                                    More Info
+                                </button>
                             </Link>
-                        </article>
-                    ))}
-                </section>
+                        </div>
+                    </article>
+                ))
             ) : (
                 <Loading />
             )}
         </>
     );
-};
+}
 
 export default OtherProjects;
