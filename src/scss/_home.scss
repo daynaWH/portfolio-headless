@@ -86,18 +86,6 @@
                 margin: 0;
             }
 
-            .toolkit {
-                display: flex;
-                flex-wrap: wrap;
-                margin: 1rem 0;
-                font-size: 1rem;
-
-                div:not(:last-child)::after {
-                    content: "|";
-                    padding: 0 0.5rem;
-                }
-            }
-
             button {
                 margin: 0 auto;
             }

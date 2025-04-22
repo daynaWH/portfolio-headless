@@ -1,0 +1,185 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.work-page {
+    margin: 10rem 0;
+
+    h1 {
+        margin-left: 4rem;
+    }
+}
+
+.work-card {
+    display: flex;
+    background-color: $secondary-color;
+    margin: 1rem 0;
+
+    &:nth-child(even) button {
+        justify-self: end;
+    }
+
+    &:nth-child(odd) {
+        flex-direction: row-reverse;
+    }
+}
+
+.hero-slider {
+    position: relative;
+    height: 35rem;
+    overflow: hidden;
+    background-color: $bg-color-dark;
+    padding: 1rem;
+
+    figure {
+        margin: 0;
+    }
+
+    .slider-btns {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        gap: 0.5rem;
+
+        button {
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 100%;
+
+            &.active {
+                background-color: $accent-blue;
+            }
+        }
+    }
+}
+
+.slide {
+    position: absolute;
+}
+
+.work-external-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.reflection-table {
+    border: 1px solid $primary-color;
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.tablist {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background-color: $primary-color-lower-opacity;
+    color: $bg-color-light;
+}
+
+.submenu {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.react-tabs__tab-panel {
+    margin: 1rem 2rem;
+
+    li {
+        list-style: disc;
+    }
+}
+
+.work-toolkit,
+.overview {
+    margin: 3rem auto;
+}
+
+.related-projects {
+    h2 {
+        text-align: center;
+    }
+
+    .carousel-wrapper {
+        max-width: 100rem;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        .carousel {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            justify-content: center;
+            transition: transform 0.5s ease-in;
+
+            &.even {
+                transform: translateX(-250px);
+            }
+
+            article {
+                border: 1px solid $primary-color;
+                border-radius: 1rem;
+                margin: 0 auto;
+                // height: 15rem;
+                position: relative;
+
+                figure {
+                    margin: 0;
+                    width: 30rem;
+                    opacity: 0.7;
+
+                    img {
+                        border-radius: 1rem;
+                    }
+                }
+
+                .toolkit,
+                .more-info-btn {
+                    display: none;
+                }
+
+                .work-basic-info {
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    background-color: rgba($bg-color-dark, 0.8);
+                    color: $bg-color-light;
+                    text-align: center;
+
+                    a {
+                        color: $bg-color-light;
+                        width: fit-content;
+                    }
+
+                    h3,
+                    p {
+                        margin: 1rem auto;
+                    }
+                }
+            }
+        }
+
+        .slider-btns {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+
+            button {
+                cursor: pointer;
+                user-select: none;
+
+                &.disabled {
+                    background-color: rgba($primary-color-lower-opacity, 0.5);
+                    cursor: default;
+                }
+            }
+        }
+    }
+}

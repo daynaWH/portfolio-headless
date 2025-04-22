@@ -79,9 +79,10 @@ function Home() {
                     </a>
                     <div className="featured-work" id="featured-work">
                         <h2>Featured Work</h2>
-                        {restData[0].acf["featured_work"].map((id) => (
-                            <OtherProjects ids={[id]} key={id} />
-                        ))}
+                        <OtherProjects
+                            ids={restData[0].acf["featured_work"]}
+                            isCarousel={false}
+                        />
 
                         <div className="view-all-works">
                             <Link to={"/works"}>View All Works</Link>

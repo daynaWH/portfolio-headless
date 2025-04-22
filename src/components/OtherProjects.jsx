@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import Loading from "./Loading";
 import { restBase } from "./Utilities";
-import FeaturedImage from "./FeaturedImage";
-import Toolkit from "./Toolkit";
-import chevronRight from "../assets/chevron-right.svg";
+import ProjectCard from "./ProjectCard";
 
-function OtherProjects({ ids }) {
+function OtherProjects({ ids, isCarousel }) {
     const restPath = restBase + `posts?include=${ids.join(",")}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
-    const [isHovering, setIsHovering] = useState(false);
+
+    const even = restData.length % 2 === 0;
+    const [activeIndex, setActiveIndex] = useState(
+        Math.floor(restData.length / 2)
+    );
+    const [transform, setTransform] = useState(even ? -250 : 0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,49 +28,73 @@ function OtherProjects({ ids }) {
         fetchData();
     }, [restPath]);
 
-    function handleMouseEnter() {
-        setIsHovering(true);
-    }
+    useEffect(() => {
+        if (restData.length > 0) {
+            const even = restData.length % 2 === 0;
+            setActiveIndex(Math.floor(restData.length / 2));
+            setTransform(even ? -250 : 0);
+        }
+    }, [restData]);
 
-    function handleMouseLeave() {
-        setIsHovering(false);
+    function slide(direction) {
+        if (direction === "left" && activeIndex !== 0) {
+            setActiveIndex(activeIndex - 1);
+            setTransform(transform + 520);
+        } else if (
+            direction === "right" &&
+            activeIndex !== restData.length - 1
+        ) {
+            setActiveIndex(activeIndex + 1);
+            setTransform(transform - 520);
+        }
     }
 
     return (
         <>
-            {isLoaded ? (
-                restData.map((post) => (
-                    <article key={post.id} id={`post-${post.id}`}>
-                        {post.featured_media !== 0 && post._embedded && (
-                            <FeaturedImage
-                                featuredImageObject={
-                                    post._embedded["wp:featuredmedia"][0]
+            {isCarousel ? (
+                // Based on the following reference: https://webtips.dev/animated-carousel-in-react
+                <div className="carousel-wrapper">
+                    <div
+                        className={even ? "carousel even" : "carousel"}
+                        style={{ transform: `translateX(${transform}px)` }}
+                    >
+                        {restData.map((post, index) => (
+                            <ProjectCard
+                                post={post}
+                                key={post.id}
+                                className={
+                                    index === activeIndex ? "active" : ""
                                 }
                             />
-                        )}
-                        <div className="work-basic-info">
-                            <h3>{post.title.rendered}</h3>
-                            <p>{post.acf["project_subheading"]}</p>
-                            <div className="toolkit">
-                                {post.acf["toolkit"].map((id) => (
-                                    <Toolkit ids={[id]} key={id} />
-                                ))}
-                            </div>
-
-                            <Link to={`/blog/${post.slug}`}>
-                                <button
-                                    className="more-info-btn"
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    More Info
-                                </button>
-                            </Link>
-                        </div>
-                    </article>
-                ))
+                        ))}
+                    </div>
+                    <div className="slider-btns">
+                        <button
+                            className={
+                                activeIndex === 0 ? "left disabled" : "left"
+                            }
+                            onClick={() => slide("left")}
+                        >
+                            Prev
+                        </button>
+                        <button
+                            className={
+                                activeIndex === restData.length - 1
+                                    ? "right disabled"
+                                    : "right"
+                            }
+                            onClick={() => slide("right")}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
             ) : (
-                <Loading />
+                <>
+                    {restData.map((post) => (
+                        <ProjectCard key={post.id} post={post} />
+                    ))}
+                </>
             )}
         </>
     );

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
 import FeaturedImage from "../components/FeaturedImage";
 import Toolkit from "../components/Toolkit";
 
-const Works = () => {
+function Works() {
     const restPath = restBase + "posts?_embed=1";
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
@@ -32,7 +32,11 @@ const Works = () => {
                     <h1>My Work</h1>
 
                     {restData.map((post) => (
-                        <article key={post.id} id={`post-${post.id}`}>
+                        <article
+                            key={post.id}
+                            id={`post-${post.id}`}
+                            className="work-card"
+                        >
                             {post.featured_media !== 0 && post._embedded && (
                                 <FeaturedImage
                                     featuredImageObject={
@@ -40,14 +44,19 @@ const Works = () => {
                                     }
                                 />
                             )}
-                            <h2>{post.title.rendered}</h2>
-                            {post.acf["project_subheading"]}
                             <div>
-                                {post.acf["toolkit"].map((id) => (
-                                    <Toolkit ids={[id]} key={id} />
-                                ))}
+                                <h2>{post.title.rendered}</h2>
+                                {post.acf["project_subheading"]}
+                                <div className="work-card-toolkit">
+                                    <Toolkit ids={post.acf["toolkit"]} />
+                                </div>
+                                <NavLink
+                                    to={`/blog/${post.slug}`}
+                                    className="btn more-info-btn"
+                                >
+                                    More Info
+                                </NavLink>
                             </div>
-                            <Link to={`/blog/${post.slug}`}>More Info</Link>
                         </article>
                     ))}
                 </>
@@ -56,6 +65,6 @@ const Works = () => {
             )}
         </>
     );
-};
+}
 
 export default Works;
