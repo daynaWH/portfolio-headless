@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
+import Toolkit from "../components/Toolkit";
 
 const About = () => {
-    const restPath = restBase + "pages/13";
+    const restPath = restBase + "pages/13?_embed";
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
@@ -25,7 +26,7 @@ const About = () => {
         <>
             {isLoaded ? (
                 <>
-                    {/* <title>{`${restData.title.rendered} | Mindset Headless`}</title> */}
+                    <title>{`${restData.title.rendered}`}</title>
                     <article id={`post-${restData.id}`}>
                         <h1>{restData.title.rendered}</h1>
                         <div
@@ -35,6 +36,13 @@ const About = () => {
                             }}
                         ></div>
                     </article>
+                    <div>
+                        <h2>Toolkit</h2>
+                        <Toolkit
+                            ids={restData.acf["toolkit"]}
+                            isGrouped={true}
+                        />
+                    </div>
                 </>
             ) : (
                 <Loading />

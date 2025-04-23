@@ -83,31 +83,30 @@ figure {
     }
 }
 
-.work-toolkit {
-    .toolkit {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        cursor: default;
+.work-toolkit .toolkit,
+.tool-group .tool-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    cursor: default;
 
-        div {
-            background-color: $accent-blue;
-            width: 15rem;
-            padding: 0.5rem 0;
+    div {
+        background-color: $accent-blue;
+        width: 15rem;
+        padding: 0.5rem 0;
 
-            border-radius: 0.5rem;
-        }
+        border-radius: 0.5rem;
+    }
 
-        i,
-        .shopify-icon {
-            font-size: 2rem;
-            vertical-align: bottom;
-            margin: 0 0.5rem 0 1rem;
-        }
+    i,
+    .shopify-icon {
+        font-size: 2rem;
+        vertical-align: bottom;
+        margin: 0 0.5rem 0 1rem;
+    }
 
-        .shopify-icon {
-            height: 2rem;
-        }
+    .shopify-icon {
+        height: 2rem;
     }
 }
 
