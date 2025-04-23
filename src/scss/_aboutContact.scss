@@ -1,0 +1,50 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.about-page {
+    p {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    h2 {
+        text-align: center;
+    }
+
+    .toolkit {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.contact-page {
+    .entry-content {
+        text-align: center;
+    }
+
+    .wp-block-social-links svg {
+        height: 3rem;
+        width: auto;
+    }
+
+    .wp-block-social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .wp-block-portfolio-blocks-email-address {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        cursor: pointer;
+
+        &:hover {
+            color: $accent-blue;
+        }
+    }
+
+    .email-copied {
+        display: none;
+    }
+}

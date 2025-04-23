@@ -21,6 +21,21 @@ const Contact = () => {
         fetchData();
     }, [restPath]);
 
+    useEffect(() => {
+        const emailBlock = document.querySelector(".email-to-copy");
+
+        if (emailBlock) {
+            emailBlock.addEventListener("click", () => {
+                const textToCopy = emailBlock.innerText;
+                navigator.clipboard.writeText(textToCopy);
+                emailBlock.innerText = "Copied!";
+                setTimeout(() => {
+                    emailBlock.innerText = textToCopy;
+                }, 1000);
+            });
+        }
+    });
+
     return (
         <>
             {isLoaded ? (
