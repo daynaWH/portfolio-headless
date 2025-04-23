@@ -24,7 +24,7 @@ const Header = () => {
 
     return (
         <header className={navOpen ? "site-header show" : "site-header hide"}>
-            <Link to="/" end>
+            <Link to="/">
                 <img src={logo} alt="Logo" className="logo" />
             </Link>
             <Nav handleNavToggle={toggleNav} />
