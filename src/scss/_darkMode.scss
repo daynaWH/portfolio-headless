@@ -1,9 +1,11 @@
+@use "variables" as *;
+@use "mixins" as *;
+
 // @media (prefers-color-scheme: dark) {
 //     :root {
 //         color: #213547;
 //         background-color: #ffffff;
 //     }
-
 //     a:hover {
 //         color: #747bff;
 //     }
@@ -11,3 +13,43 @@
 //         background-color: #f9f9f9;
 //     }
 // }
+[data-theme="dark"] {
+    color: $bg-color-light;
+
+    header {
+        background-color: rgba($bg-color-dark, 0.7);
+    }
+
+    .intro {
+        background: linear-gradient(to right, white 8px, transparent 8px) 0 0,
+            linear-gradient(to left, white 8px, transparent 8px) 100% 100%,
+            linear-gradient(to bottom, white 8px, transparent 8px) 0 0,
+            linear-gradient(to top, white 8px, transparent 8px) 100% 100%;
+
+        background-repeat: no-repeat;
+        background-size: 3rem 3rem;
+    }
+
+    .scroll-down-btn,
+    .social-icons img,
+    .contact-page svg,
+    .site-header.hide .nav-btn {
+        filter: invert(1);
+    }
+
+    .work-card,
+    .work-toolkit .toolkit,
+    .tool-item {
+        color: $primary-color;
+    }
+
+    .single-work-page .reflection-table {
+        border: 1px solid $bg-color-light;
+    }
+
+    @include mq-large($tablet) {
+        a:not(a.btn) {
+            color: $bg-color-light;
+        }
+    }
+}

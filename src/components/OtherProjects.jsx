@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import Loading from "./Loading";
+// import Loading from "./Loading";
 import { restBase } from "./Utilities";
 import ProjectCard from "./ProjectCard";
+import { motion } from "framer-motion";
+import arrowCarousel from "../assets/arrow-carousel.svg";
 
 function OtherProjects({ ids, isCarousel }) {
     const restPath = restBase + `posts?include=${ids.join(",")}&_embed=1`;
@@ -75,7 +77,7 @@ function OtherProjects({ ids, isCarousel }) {
                             }
                             onClick={() => slide("left")}
                         >
-                            Prev
+                            <img src={arrowCarousel} alt="Arrow Left" />
                         </button>
                         <button
                             className={
@@ -85,15 +87,31 @@ function OtherProjects({ ids, isCarousel }) {
                             }
                             onClick={() => slide("right")}
                         >
-                            Next
+                            <img src={arrowCarousel} alt="Arrow Right" />
                         </button>
                     </div>
                 </div>
             ) : (
                 <>
-                    {restData.map((post) => (
-                        <ProjectCard key={post.id} post={post} />
+                    {restData.map((post, index) => (
+                        <motion.div
+                            key={post.id}
+                            className="project-card"
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{
+                                opacity: 1,
+                                x: 0,
+                                transition: {
+                                    delay: 0.2 * index,
+                                    duration: 0.5,
+                                },
+                            }}
+                            viewport={{ once: false, amount: 0.5 }}
+                        >
+                            <ProjectCard post={post} />
+                        </motion.div>
                     ))}
+                    {/* <ProjectCard key={post.id} post={post} /> */}
                 </>
             )}
         </>

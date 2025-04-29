@@ -3,6 +3,7 @@
 
 .logo {
     height: 2rem;
+    cursor: pointer;
 }
 
 .site-header {
@@ -13,9 +14,10 @@
     left: 0;
     right: 0;
     top: 0;
-    padding: 1rem 3rem;
-    background-color: $bg-color-light;
+    padding: 1rem 7rem 1rem 3rem;
+    background-color: rgba($bg-color-light, 0.8);
     box-shadow: $accent-blue 0px 1px 10px 5px;
+    z-index: 1000;
 }
 
 .nav-links {
@@ -110,7 +112,7 @@
 // Footer
 
 footer {
-    padding: 1.25rem;
+    padding: 1.25rem 3rem;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

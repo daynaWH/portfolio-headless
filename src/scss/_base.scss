@@ -2,21 +2,36 @@
 
 html {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 *,
 *:before,
 *:after {
     box-sizing: inherit;
+    // cursor: none;
 }
 
 body {
     background: #f7f7f7;
-    min-height: 100vh;
+    // min-height: 100vh;
 }
 
 main {
-    margin: 10rem 4rem 0;
+    margin: 8rem 4rem;
+
+    scroll-snap-type: y mandatory;
+
+    &.home-page {
+        margin: 0 4rem;
+    }
+}
+
+section {
+    // display: grid;
+    // height: 100vh;
+    // align-content: center;
+    // place-items: center;
 }
 
 // Elements
@@ -26,6 +41,22 @@ li {
 
 figure {
     margin: 1em 0; /* Extra wide images within figure tags don't overflow the content area. */
+}
+
+h1 {
+    position: relative;
+    width: fit-content;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 1rem;
+        background-color: $accent-blue;
+        bottom: 0.7rem;
+        left: -1rem;
+        z-index: -1;
+    }
 }
 
 .loading {
@@ -52,62 +83,21 @@ figure {
     font-size: 1rem;
     display: flex;
     justify-content: center;
+    // text-align: center;
 }
 
-.more-info-btn {
-    overflow: hidden;
-    text-transform: uppercase;
-
-    &:hover {
-        text-indent: 2rem;
-    }
-}
-
-.featured-work article {
-    background-color: $secondary-color;
-}
-
-.work-card-toolkit .toolkit {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem 0;
-    font-size: 1rem;
-
-    div:not(:last-child)::after {
-        content: "|";
-        padding: 0 0.5rem;
-    }
-
-    i {
-        display: none;
-    }
-}
-
-.work-toolkit .toolkit,
-.tool-group .tool-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    cursor: default;
-
-    div {
-        background-color: $accent-blue;
-        width: 15rem;
-        padding: 0.5rem 0;
-
-        border-radius: 0.5rem;
-    }
-
-    i,
-    .shopify-icon {
-        font-size: 2rem;
-        vertical-align: bottom;
-        margin: 0 0.5rem 0 1rem;
-    }
-
-    .shopify-icon {
-        height: 2rem;
-    }
+.cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 2rem;
+    width: 2rem;
+    // border-radius: 50%;
+    // background-color: $bg-color-light;
+    // mix-blend-mode: difference;
+    // background-image: url(../assets/cursor.svg);
+    z-index: 2000;
+    pointer-events: none;
 }
 
 // Responsive Media
@@ -116,3 +106,103 @@ video {
     height: auto; /* Make sure images are scaled correctly. */
     max-width: 100%; /* Adhere to container width. */
 }
+
+.loading-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+}
+
+@media (prefers-reduced-motion) {
+}
+
+// .toggle-container {
+//     position: absolute;
+//     top: 10rem;
+//     right: 12rem;
+// }
+
+// .toggle {
+//     display: flex;
+//     align-items: center;
+//     cursor: pointer;
+//     color: $bg-color-dark;
+//     position: relative;
+
+//     &:before {
+//         content: "";
+//         height: 3rem;
+//         width: 6rem;
+//         border-radius: 2rem;
+//         background-color: $accent-blue;
+//         margin-right: 0.5rem;
+//         position: absolute;
+//     }
+
+//     &:after {
+//         content: "";
+//         height: 2rem;
+//         width: 2rem;
+//         border-radius: 1rem;
+//         background-color: $accent-coral;
+//         position: absolute;
+//         left: 0.5rem;
+//     }
+
+//     &:checked {
+//         transform: translateX(100%);
+//     }
+// }
+
+.toggle-container {
+    position: fixed;
+    top: 1.7rem;
+    right: 1rem;
+    cursor: pointer;
+    z-index: 2000;
+}
+
+// .switch {
+//     position: relative;
+//     display: inline-block;
+//     width: 60px;
+//     height: 30px;
+// }
+
+// .switch input {
+//     opacity: 0;
+//     width: 0;
+//     height: 0;
+// }
+
+// .slider {
+//     position: absolute;
+//     cursor: pointer;
+//     background-color: #ccc;
+//     border-radius: 30px;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     transition: background-color 0.3s;
+// }
+
+// .switch input:checked + .slider {
+//     background-color: #222;
+
+//     .icon {
+//         filter: invert(1);
+//     }
+// }
+
+// .icon {
+//     width: 22px;
+//     height: 22px;
+// }

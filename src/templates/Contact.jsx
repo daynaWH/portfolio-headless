@@ -3,7 +3,7 @@ import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
 
 const Contact = () => {
-    const restPath = restBase + "pages/15";
+    const restPath = restBase + "pages/15?_embed=1";
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
@@ -20,6 +20,24 @@ const Contact = () => {
         };
         fetchData();
     }, [restPath]);
+
+    useEffect(() => {
+        if (!isLoaded) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            {
+                threshold: 0.5,
+            }
+        );
+        const hiddenElements = document.querySelectorAll(".hidden");
+        return hiddenElements.forEach((el) => observer.observe(el));
+    }, [isLoaded]);
 
     useEffect(() => {
         const emailBlock = document.querySelector(".email-to-copy");
@@ -41,21 +59,15 @@ const Contact = () => {
             {isLoaded ? (
                 <>
                     <title>{`${restData.title.rendered}`}</title>
-                    <article id={`post-${restData.id}`}>
+                    <section id={`post-${restData.id}`}>
                         <h1>{restData.title.rendered}</h1>
                         <div
-                            className="entry-content"
+                            className="entry-content hidden"
                             dangerouslySetInnerHTML={{
                                 __html: restData.content.rendered,
                             }}
                         ></div>
-                        {/* <div
-                            className="entry-content"
-                            dangerouslySetInnerHTML={{
-                                __html: restData.meta.email_address,
-                            }}
-                        ></div> */}
-                    </article>
+                    </section>
                 </>
             ) : (
                 <Loading />

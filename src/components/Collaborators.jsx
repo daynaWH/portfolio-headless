@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
+// import Loading from "./Loading";
 import { restBase } from "./Utilities";
 
 const Collaborators = ({ ids }) => {
@@ -23,7 +23,7 @@ const Collaborators = ({ ids }) => {
 
     return (
         <>
-            {isLoaded ? (
+            {isLoaded && (
                 <>
                     {restData.map((collaborator) => (
                         <div
@@ -34,8 +34,6 @@ const Collaborators = ({ ids }) => {
                         </div>
                     ))}
                 </>
-            ) : (
-                <Loading />
             )}
         </>
     );

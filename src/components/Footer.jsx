@@ -1,10 +1,14 @@
 import linkedinIcon from "../assets/icon-linkedin.svg";
 import githubIcon from "../assets/icon-github.svg";
 import emailIcon from "../assets/icon-email.svg";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 function Footer() {
+    const location = useLocation();
+    const currentPath = location.pathname;
+
     return (
-        <footer>
+        <footer className={currentPath === "/contact" ? "contact-footer" : ""}>
             <p className="copyright">
                 &copy; {new Date().getFullYear()} | Dayna Cho
             </p>

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import logo from "../assets/logo-light.svg";
+import logoLight from "../assets/logo-light.svg";
+import logoDark from "../assets/logo-dark.svg";
 import Nav from "./Nav";
 
-const Header = () => {
+function Header({ theme }) {
     const [navOpen, setNavOpen] = useState(false);
 
     function toggleNav() {
@@ -25,7 +26,11 @@ const Header = () => {
     return (
         <header className={navOpen ? "site-header show" : "site-header hide"}>
             <Link to="/">
-                <img src={logo} alt="Logo" className="logo" />
+                <img
+                    src={theme === "dark" ? logoDark : logoLight}
+                    alt="Logo"
+                    className="logo"
+                />
             </Link>
             <Nav handleNavToggle={toggleNav} />
             <button
@@ -41,6 +46,6 @@ const Header = () => {
             </button>
         </header>
     );
-};
+}
 
 export default Header;

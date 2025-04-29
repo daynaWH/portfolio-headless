@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
-import FeaturedImage from "../components/FeaturedImage";
 import OtherProjects from "../components/OtherProjects";
 import Toolkit from "../components/Toolkit";
 import Collaborators from "../components/Collaborators";
@@ -11,7 +10,7 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 
 function SingleWork() {
     const { slug } = useParams();
-    const restPath = restBase + `posts?slug=${slug}&_embed=`;
+    const restPath = restBase + `posts?slug=${slug}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
@@ -121,6 +120,9 @@ function SingleWork() {
                                 ids={restData.acf["other_projects"]}
                                 isCarousel={true}
                             />
+                            <Link to={"/works"} className="view-all-works">
+                                View All Works
+                            </Link>
                             {/* ))} */}
                             {/* </div> */}
                         </div>

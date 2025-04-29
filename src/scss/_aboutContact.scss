@@ -2,28 +2,55 @@
 @use "mixins" as *;
 
 .about-page {
+    // margin-top: 8rem;
     p {
         max-width: 80%;
-        margin: 0 auto;
+        margin: 2rem auto;
     }
-    h2 {
+
+    h2,
+    h3 {
         text-align: center;
     }
 
     .toolkit {
         display: flex;
-        justify-content: space-between;
+    }
+
+    .hidden {
+        opacity: 0;
+        transform: translateX(50%);
+        transition: all 1.5s;
+        margin-bottom: 5rem;
+    }
+
+    .visible {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+
+    .hobbies {
+        display: block;
+        font-size: 2rem;
+        text-align: center;
     }
 }
 
 .contact-page {
+    // margin-top: 8rem;
+
     .entry-content {
         text-align: center;
+        margin: 5rem auto;
     }
 
     .wp-block-social-links svg {
         height: 3rem;
         width: auto;
+
+        #{$link-hover-selector} {
+            fill: $accent-blue;
+        }
     }
 
     .wp-block-social-links {
@@ -37,6 +64,8 @@
         align-items: center;
         justify-content: center;
         gap: 1rem;
+        width: fit-content;
+        margin: 0 auto;
         cursor: pointer;
 
         &:hover {
@@ -47,4 +76,22 @@
     .email-copied {
         display: none;
     }
+
+    .hidden {
+        opacity: 0;
+        scale: 0.9;
+        transition: all 1.5s;
+    }
+
+    .visible {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.contact-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

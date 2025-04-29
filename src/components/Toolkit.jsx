@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
+// import Loading from "./Loading";
 import { restBase } from "./Utilities";
 import shopifyIcon from "../assets/shopify-icon.svg";
 
@@ -45,7 +45,7 @@ function Toolkit({ ids, isGrouped }) {
             );
 
             return (
-                <div key={parent.id} className="tool-group">
+                <div key={parent.id} className="tool-group ">
                     <h3>{parent.name}</h3>
                     <div className="tool-list">
                         {children.map((child) => (
@@ -61,7 +61,7 @@ function Toolkit({ ids, isGrouped }) {
 
     return (
         <div className="toolkit">
-            {isLoaded ? (
+            {isLoaded && (
                 <>
                     {isGrouped
                         ? groupTools(restData)
@@ -71,8 +71,6 @@ function Toolkit({ ids, isGrouped }) {
                               </div>
                           ))}
                 </>
-            ) : (
-                <Loading />
             )}
         </div>
     );

@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import { restBase } from "./Utilities";
+import { motion, AnimatePresence } from "framer-motion";
 
 function MockupSlider({ ids }) {
     const restPath =
         restBase + `media?include=${ids.join(",")}&order=asc&embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
-
     const [activeIndex, setActiveIndex] = useState(0);
+    const [direction, setDirection] = useState("null");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,78 +25,78 @@ function MockupSlider({ ids }) {
         fetchData();
     }, [restPath]);
 
-    function slideNext() {
-        setActiveIndex((val) => {
-            if (val >= restData.length - 1) {
-                return 0;
-            } else {
-                return val + 1;
-            }
-        });
-    }
+    const handleDotClick = (index) => {
+        setDirection(index > activeIndex ? "down" : "up");
+        setActiveIndex(index);
+    };
 
-    function slidePrev() {
-        setActiveIndex((val) => {
-            if (val <= 0) {
-                return restData.length - 1;
-            } else {
-                return val - 1;
-            }
-        });
-    }
+    const variants = {
+        enter: (direction) => ({
+            y: direction === "down" ? -100 : 100,
+            opacity: 0,
+        }),
+        center: {
+            y: 0,
+            opacity: 1,
+        },
+        exit: (direction) => ({
+            y: direction === "up" ? 100 : -100,
+            opacity: 0,
+        }),
+    };
 
     return (
         <div className="hero-slider">
-            {isLoaded ? (
+            {isLoaded && (
                 <>
-                    {restData.map((media, index) => (
-                        <figure
-                            className={
-                                index === activeIndex ? "slide active" : "slide"
-                            }
-                            key={index}
+                    <AnimatePresence initial={false} custom={direction}>
+                        <motion.figure
+                            key={activeIndex}
+                            transition={{ duration: 0.3 }}
+                            variants={variants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
                         >
-                            {index === activeIndex && (
-                                <img
-                                    src={media.source_url}
-                                    width={media.media_details.sizes.full.width}
-                                    height={
-                                        media.media_details.sizes.full.height
-                                    }
-                                    alt={media.alt_text}
-                                    srcSet={`${media.source_url} ${
-                                        media.media_details.sizes.full.width
-                                    }
-                                ${
-                                    media.media_details.sizes.large
-                                        ? media.media_details.sizes.large
-                                              .source_url + " 1024w,"
-                                        : ""
+                            <img
+                                src={restData[activeIndex].source_url}
+                                width={
+                                    restData[activeIndex].media_details.sizes
+                                        .full.width
                                 }
-                                ${
-                                    media.media_details.sizes.medium_large
-                                        ? media.media_details.sizes.medium_large
-                                              .source_url + " 768w,"
-                                        : ""
+                                height={
+                                    restData[activeIndex].media_details.sizes
+                                        .full.height
                                 }
-                                ${
-                                    media.media_details.sizes.medium
-                                        ? media.media_details.sizes.medium
-                                              .source_url + " 300w"
-                                        : ""
-                                }`}
-                                    sizes={`(max-width: ${media.media_details.sizes.full.width}) 100vw, ${media.media_details.sizes.full.width}px`}
-                                />
-                            )}
-                        </figure>
-                    ))}
-
+                                alt={restData[activeIndex].alt_text}
+                                srcSet={`${restData[activeIndex].source_url} ${
+                                    restData[activeIndex].media_details.sizes
+                                        .full.width
+                                }w,
+                                        ${
+                                            restData[activeIndex].media_details
+                                                .sizes.large?.source_url ?? ""
+                                        } 1024w,
+                                        ${
+                                            restData[activeIndex].media_details
+                                                .sizes.medium_large
+                                                ?.source_url ?? ""
+                                        } 768w,
+                                        ${
+                                            restData[activeIndex].media_details
+                                                .sizes.medium?.source_url ?? ""
+                                        } 300w
+                                    `}
+                                sizes={`(max-width: ${restData[activeIndex].media_details.sizes.full.width}) 100vw, ${restData[activeIndex].media_details.sizes.full.width}px`}
+                            />
+                        </motion.figure>
+                    </AnimatePresence>
                     <div className="slider-btns">
                         {restData.map((media, index) => (
                             <button
                                 key={index}
                                 onClick={() => {
-                                    setActiveIndex(index);
+                                    handleDotClick(index);
                                 }}
                                 className={
                                     index === activeIndex ? "active" : "default"
@@ -104,8 +105,6 @@ function MockupSlider({ ids }) {
                         ))}
                     </div>
                 </>
-            ) : (
-                <Loading />
             )}
         </div>
     );
