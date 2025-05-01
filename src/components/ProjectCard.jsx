@@ -11,8 +11,8 @@ function ProjectCard({ post }) {
                 />
             )}
             <div className="work-basic-info">
-                <Link to={`/blog/${post.slug}`} className="">
-                    <h3>{post.title.rendered}</h3>
+                <Link to={`/blog/${post.slug}`}>
+                    <h3>{post.acf["project_title"]}</h3>
                 </Link>
                 <p className="subheading">{post.acf["project_subheading"]}</p>
                 <div className="work-card-toolkit">

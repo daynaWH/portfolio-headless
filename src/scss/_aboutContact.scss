@@ -21,6 +21,8 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
+            max-width: 90rem;
+            margin: 0 auto;
         }
     }
 

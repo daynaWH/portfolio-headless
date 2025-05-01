@@ -36,7 +36,7 @@ function App() {
 
     return (
         <div className="App" data-theme={isOn ? "dark" : "light"}>
-            {/* <ScrollToTop /> */}
+            <ScrollToTop />
             <ParticlesBackground theme={isOn ? "dark" : "light"} />
             <ToggleTheme isOn={isOn} onToggle={() => setIsOn(!isOn)} />
             <Header theme={isOn ? "dark" : "light"} />

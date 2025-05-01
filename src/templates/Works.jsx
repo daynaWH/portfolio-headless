@@ -57,7 +57,7 @@ function Works() {
                                 />
                             )}
                             <div className="work-page-card-info">
-                                <h2>{post.title.rendered}</h2>
+                                <h2>{post.acf["project_title"]}</h2>
                                 {post.acf["project_subheading"]}
                                 <div className="work-card-toolkit">
                                     <Toolkit ids={post.acf["toolkit"]} />

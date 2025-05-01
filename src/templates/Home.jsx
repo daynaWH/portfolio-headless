@@ -31,7 +31,7 @@ function Home() {
         <>
             {isLoaded ? (
                 <>
-                    <title>Dayna Cho</title>
+                    <title>Dayna Cho | Portfolio</title>
                     <section className="home-intro">
                         <article className="intro">
                             <TypeAnimation

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function MockupSlider({ ids }) {
     const restPath =
-        restBase + `media?include=${ids.join(",")}&order=asc&embed=1`;
+        restBase + `media?include=${ids.join(",")}&order=asc&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
