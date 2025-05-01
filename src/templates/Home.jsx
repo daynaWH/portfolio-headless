@@ -31,7 +31,7 @@ function Home() {
         <>
             {isLoaded ? (
                 <>
-                    <title>Dayna's Portfolio</title>
+                    <title>Dayna Cho</title>
                     <section className="home-intro">
                         <article className="intro">
                             <TypeAnimation
@@ -74,7 +74,7 @@ function Home() {
                                 ),
                             }}
                         ></div>
-                        <a href="#featured-work">
+                        <a href="#featured-work-wrapper">
                             <img
                                 src={chevronDown}
                                 alt="Scroll Down"
@@ -84,8 +84,8 @@ function Home() {
                     </section>
 
                     <motion.section
-                        className="featured-work"
-                        id="featured-work"
+                        className="featured-work-wrapper"
+                        id="featured-work-wrapper"
                         initial={{ opacity: 0 }}
                         whileInView={{
                             opacity: 1,
@@ -94,10 +94,12 @@ function Home() {
                         viewport={{ once: false, amount: 0.5 }}
                     >
                         <h2>Featured Work</h2>
+                        {/* <div className="featured-works"> */}
                         <OtherProjects
                             ids={restData[0].acf["featured_work"]}
                             isCarousel={false}
                         />
+                        {/* </div> */}
 
                         {/* <div className="view-all-works"> */}
                         <Link to={"/works"} className="view-all-works">

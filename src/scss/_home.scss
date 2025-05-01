@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 .home-intro {
     height: 100vh;
@@ -8,30 +9,23 @@
     grid-template-rows: 3fr 1fr 1fr;
     align-content: center;
     place-items: center;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
 }
 
 .intro {
-    width: 35rem;
-    height: 16rem;
-    // margin: 14rem auto 0;
-    padding-top: 2rem;
+    min-height: 15rem;
+    min-width: 15rem;
+    padding: 2rem;
     text-align: center;
-    // align-self: end;
 
     background: linear-gradient(to right, black 8px, transparent 8px) 0 0,
         linear-gradient(to left, black 8px, transparent 8px) 100% 100%,
         linear-gradient(to bottom, black 8px, transparent 8px) 0 0,
         linear-gradient(to top, black 8px, transparent 8px) 100% 100%;
-
     background-repeat: no-repeat;
     background-size: 3rem 3rem;
 
     .typewriter {
-        font-size: 3rem;
+        font-size: 2.5rem;
         white-space: pre-line;
         text-align: center;
         font-weight: 500;
@@ -54,6 +48,15 @@
                 transform-origin: left;
                 z-index: -1;
             }
+        }
+    }
+
+    @include mq-large($tablet) {
+        width: 35rem;
+        height: 17rem;
+
+        .typewriter {
+            font-size: 3.5rem;
         }
     }
 }
@@ -92,12 +95,9 @@
     }
 }
 
-.featured-work {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, auto);
-    column-gap: 5rem;
-    padding-top: 5rem;
+.featured-work-wrapper {
+    padding: 5rem 0;
+    text-align: center;
 
     h2,
     .view-all-works {
@@ -106,6 +106,8 @@
     }
 
     article {
+        max-width: 80%;
+        margin: 2rem auto;
         border-radius: 1rem;
         box-shadow: $accent-blue 2px 7px 10px 0px;
         position: relative;
@@ -151,6 +153,13 @@
                 }
             }
         }
+    }
+
+    @include mq-large($laptop) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, auto);
+        column-gap: 5rem;
     }
 }
 

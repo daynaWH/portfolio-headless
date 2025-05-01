@@ -15,6 +15,13 @@
 
     .toolkit {
         display: flex;
+        flex-wrap: wrap;
+
+        @include mq-large($tablet) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
     }
 
     .hidden {
@@ -31,7 +38,6 @@
 
     .hobbies {
         display: block;
-        font-size: 2rem;
         text-align: center;
     }
 }

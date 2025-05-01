@@ -4,23 +4,66 @@ import { restBase } from "./Utilities";
 import shopifyIcon from "../assets/shopify-icon.svg";
 
 function Toolkit({ ids, isGrouped }) {
-    const restPath = restBase + `categories?include=${ids.join(",")}&embed=1`;
+    const restPath = restBase + `categories?include=${ids.join(",")}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch(restPath);
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             setData(data);
+    //             setLoadStatus(true);
+    //         } else {
+    //             setLoadStatus(false);
+    //         }
+    //     };
+    //     fetchData();
+    // }, [restPath]);
+
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(restPath);
-            if (response.ok) {
-                const data = await response.json();
-                setData(data);
+        const fetchAll = async () => {
+            try {
+                // Fetch all children of the given parent IDs
+                const allChildren = await Promise.all(
+                    ids.map(async (parentId) => {
+                        const res = await fetch(
+                            `${restBase}categories?parent=${parentId}`
+                        );
+                        if (!res.ok) return [];
+                        const data = await res.json();
+                        return { parentId, children: data };
+                    })
+                );
+
+                // Fetch parent category details
+                const parentRes = await fetch(
+                    `${restBase}categories?include=${ids.join(",")}`
+                );
+                const parentData = parentRes.ok ? await parentRes.json() : [];
+
+                const combined = allChildren.flatMap(
+                    ({ parentId, children }) => {
+                        const parent = parentData.find(
+                            (p) => p.id === parentId
+                        );
+                        return parent
+                            ? [{ ...parent, _children: children }]
+                            : [];
+                    }
+                );
+
+                setData(combined);
                 setLoadStatus(true);
-            } else {
+            } catch (err) {
+                console.error("Toolkit fetch failed:", err);
                 setLoadStatus(false);
             }
         };
-        fetchData();
-    }, [restPath]);
+
+        fetchAll();
+    }, [ids]);
 
     function renderTool(tool) {
         return (
@@ -36,27 +79,20 @@ function Toolkit({ ids, isGrouped }) {
     }
 
     function groupTools(tools) {
-        const parentCategories = tools.filter((tool) => tool.parent === 0);
-        const childCategories = tools.filter((tool) => tool.parent !== 0);
-
-        return parentCategories.map((parent) => {
-            const children = childCategories.filter(
-                (child) => child.parent === parent.id
-            );
-
-            return (
-                <div key={parent.id} className="tool-group ">
-                    <h3>{parent.name}</h3>
+        return tools
+            .filter((tool) => tool._children && tool._children.length > 0)
+            .map((tool) => (
+                <div key={tool.id} className="tool-group">
+                    {tool.parent === 0 && <h3>{tool.name}</h3>}
                     <div className="tool-list">
-                        {children.map((child) => (
+                        {tool._children.map((child) => (
                             <div key={child.id} className="tool-item">
                                 {renderTool(child)}
                             </div>
                         ))}
                     </div>
                 </div>
-            );
-        });
+            ));
     }
 
     return (

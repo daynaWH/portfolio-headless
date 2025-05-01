@@ -47,9 +47,9 @@
         border: 1px solid $bg-color-light;
     }
 
-    @include mq-large($tablet) {
-        a:not(a.btn) {
-            color: $bg-color-light;
-        }
+    // @include mq-large($tablet) {
+    a:not(a.btn):not(.nav-links a) {
+        color: $bg-color-light;
     }
+    // }
 }

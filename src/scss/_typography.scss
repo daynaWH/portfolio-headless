@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 body,
 button,
@@ -16,11 +17,19 @@ h2,
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
+
+    @include mq-large($tablet) {
+        font-size: 3rem;
+    }
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.3rem;
+
+    @include mq-large($tablet) {
+        font-size: 2rem;
+    }
 }
 
 .copyright {
@@ -28,15 +37,23 @@ h2 {
 }
 
 .single-work-page {
-    h1,
-    h2 {
-        margin: 0;
-    }
+    // h1,
+    // h2 {
+    //     margin: 0;
+    // }
 }
 
 .about-page .entry-content {
     h2 {
         color: $accent-coral;
+    }
+}
+
+.hobbies {
+    font-size: 1.5rem;
+
+    @include mq-large($tablet) {
+        font-size: 2rem;
     }
 }
 

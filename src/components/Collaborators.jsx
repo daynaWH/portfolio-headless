@@ -23,18 +23,12 @@ const Collaborators = ({ ids }) => {
 
     return (
         <>
-            {isLoaded && (
-                <>
-                    {restData.map((collaborator) => (
-                        <div
-                            key={collaborator.id}
-                            id={`tool-${collaborator.id}`}
-                        >
-                            {collaborator.name}
-                        </div>
-                    ))}
-                </>
-            )}
+            {isLoaded &&
+                restData.map((collaborator) => (
+                    <p key={collaborator.id} id={`tool-${collaborator.id}`}>
+                        {collaborator.name}
+                    </p>
+                ))}
         </>
     );
 };

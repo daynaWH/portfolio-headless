@@ -3,12 +3,9 @@
 
 .work-page {
     .work-card {
-        // display: flex;
-        display: grid;
-        align-items: center;
         background-color: rgba($secondary-color, 0.7);
-        padding: 0 2rem;
-        margin: 5rem 0;
+        padding: 0 1rem 1rem 1rem;
+        margin: 2rem 0;
         box-shadow: $accent-blue 2px 3px 5px 0px;
 
         .work-page-card-info {
@@ -16,34 +13,12 @@
             z-index: 100;
 
             .work-card-toolkit .toolkit {
+                font-size: 0.8rem;
                 justify-content: initial;
-                margin: 1.5rem 0;
             }
 
             h2 {
                 margin: 0;
-            }
-        }
-
-        &:nth-of-type(odd) {
-            grid-template-columns: 2fr 1fr;
-            .work-page-card-info {
-                left: -2rem;
-            }
-
-            button {
-                justify-self: end;
-            }
-        }
-
-        &:nth-of-type(even) {
-            // flex-direction: row-reverse;
-            grid-template-columns: 1fr 2fr;
-
-            .work-page-card-info {
-                justify-self: end;
-                right: -2rem;
-                order: -1;
             }
         }
 
@@ -52,9 +27,8 @@
             border-radius: 1rem;
 
             img {
-                height: 20rem;
-                margin: 0 auto;
-                object-fit: contain;
+                margin: 1rem auto;
+                // object-fit: contain;
                 transform: scale(1);
                 transition: all 0.5s ease-in;
 
@@ -63,12 +37,73 @@
                 }
             }
         }
+
+        a {
+            margin: 0 auto;
+        }
+
+        @include mq-large($mobileLarge) {
+            display: grid;
+            align-items: center;
+            padding: 1rem 2rem;
+
+            &:nth-of-type(odd) {
+                grid-template-columns: 2fr 1fr;
+
+                .work-page-card-info {
+                    left: 1rem;
+                }
+            }
+
+            &:nth-of-type(even) {
+                grid-template-columns: 1fr 2fr;
+
+                .work-page-card-info {
+                    justify-self: end;
+                    order: -1;
+                }
+            }
+
+            figure img {
+                height: 10rem;
+            }
+
+            .work-page-card-info {
+                .work-card-toolkit .toolkit {
+                    font-size: 1rem;
+                    margin: 1.5rem 0;
+                }
+            }
+        }
+
+        @include mq-large($tablet) {
+            margin: 5rem 0;
+
+            &:nth-of-type(odd) {
+                .work-page-card-info {
+                    left: -2rem;
+                }
+            }
+
+            &:nth-of-type(even) {
+                .work-page-card-info {
+                    right: -2rem;
+                    justify-self: end;
+                }
+            }
+
+            figure img {
+                height: 20rem;
+            }
+
+            a {
+                margin: 0;
+            }
+        }
     }
 }
 
 .single-work-page {
-    // margin-top: 8rem;
-
     .work-toolkit .toolkit {
         justify-content: start;
     }
@@ -76,37 +111,43 @@
     .hero-slider {
         position: relative;
         max-height: 35rem;
+        width: 100%;
         overflow: hidden;
         background-color: $bg-color-dark;
         padding: 1rem;
+        aspect-ratio: 16 / 9;
+        margin: 0 auto;
+        display: block;
 
         figure {
-            margin: 0;
+            margin: 0 auto;
+            width: 85%;
         }
 
         .slider-btns {
             display: flex;
             flex-direction: column;
             position: absolute;
-            right: 0;
-            bottom: 0;
+            right: 0.5rem;
+            bottom: 0.5rem;
             gap: 0.5rem;
 
             button {
-                height: 1.5rem;
-                width: 1.5rem;
+                height: 1rem;
+                width: 1rem;
                 border-radius: 100%;
 
                 &.active {
                     background-color: $accent-blue;
+                    border: 1px solid $bg-color-light;
                 }
             }
         }
     }
 
-    .slide {
-        position: absolute;
-    }
+    // .slide {
+    //     position: absolute;
+    // }
 
     .work-external-links {
         display: flex;
@@ -123,26 +164,8 @@
         }
     }
 
-    // .overview {
-    //     position: relative;
-
-    //     .entry-content {
-    //         position: relative;
-
-    //         &::before {
-    //             content: "";
-    //             position: absolute;
-    //             height: 100%;
-    //             width: 0.25rem;
-    //             background-color: $accent-blue;
-    //             left: -1rem;
-    //         }
-    //     }
-    // }
-
     .reflection-table {
         border: 1px solid $primary-color;
-        // max-width: 80%;
     }
 
     .tablist {
@@ -178,8 +201,31 @@
 
     .work-toolkit,
     .overview,
-    .reflection-table {
-        margin: 3rem auto;
+    .reflection-table,
+    .collaborators,
+    .toolkit-collaborators-wrapper {
+        margin: 3rem 1rem;
+
+        p {
+            margin: 0;
+        }
+
+        @include mq-large($tablet) {
+            margin: 3rem auto;
+        }
+    }
+
+    .toolkit-collaborators-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        *:not(h2) {
+            margin: 0;
+        }
+
+        @include mq-small($mobileLarge) {
+            flex-wrap: wrap;
+        }
     }
 
     .related-projects {
@@ -308,6 +354,12 @@
             }
         }
     }
+
+    @include mq-small($mobileLarge) {
+        .subheading {
+            margin-left: 1rem;
+        }
+    }
 }
 
 .more-info-btn {
@@ -317,27 +369,36 @@
     transition: all 0.2s ease-in-out;
 
     &:hover {
-        text-indent: 2rem;
+        background-color: $primary-color;
+        color: $accent-coral;
+    }
 
-        &:before {
-            content: "\00bb";
-            background-color: $primary-color;
-            color: $accent-coral;
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 2.5rem;
-            font-size: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-right: 1.5rem;
+    @include mq-large($laptop) {
+        &:hover {
+            text-indent: 2rem;
+            background-color: $accent-coral;
+            color: $primary-color;
+
+            &:before {
+                content: "\00bb";
+                background-color: $primary-color;
+                color: $accent-coral;
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 2.5rem;
+                font-size: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-right: 1.5rem;
+            }
         }
     }
 }
 
-.featured-work article {
+.featured-work-wrapper article {
     background-color: $secondary-color;
 }
 
@@ -379,12 +440,12 @@
 
     i,
     .shopify-icon {
-        font-size: 2rem;
+        font-size: 1.5rem;
         vertical-align: bottom;
         margin: 0 0.5rem 0 1rem;
     }
 
     .shopify-icon {
-        height: 2rem;
+        height: 1.5rem;
     }
 }
