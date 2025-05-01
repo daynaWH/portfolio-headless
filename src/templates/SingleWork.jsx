@@ -32,9 +32,9 @@ function SingleWork() {
         <>
             {isLoaded ? (
                 <>
-                    <title>{`${restData.title.rendered}`}</title>
+                    <title>{`${restData.acf["project_title"]} | ${restData.title.rendered}`}</title>
                     <article id={`post-${restData.id}`}>
-                        <h1>{restData.title.rendered}</h1>
+                        <h1>{restData.acf["project_title"]}</h1>
                         <h2 className="subheading">
                             {restData.acf["project_subheading"]}
                         </h2>

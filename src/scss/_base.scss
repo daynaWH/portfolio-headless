@@ -135,3 +135,30 @@ video {
 
 @media (prefers-reduced-motion) {
 }
+
+.page-not-found {
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .error-img {
+        max-width: 15rem;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 0.5rem;
+        text-decoration: underline;
+
+        &:hover {
+            color: $accent-blue;
+        }
+    }
+
+    .cursor-plane {
+        height: 1.5rem;
+    }
+}

@@ -5,6 +5,7 @@ import Works from "./templates/Works";
 import SingleWork from "./templates/SingleWork";
 import Contact from "./templates/Contact";
 import About from "./templates/About";
+import NotFound from "./templates/NotFound";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { motion, useMotionValue, useSpring } from "framer-motion";
@@ -28,39 +29,14 @@ function App() {
             return "contact-page";
         } else if (path.includes("/blog/")) {
             return "single-work-page";
+        } else {
+            return "page-not-found";
         }
     }
 
-    // const cursorX = useMotionValue(-100);
-    // const cursorY = useMotionValue(-100);
-
-    // const springConfig = { damping: 25, stiffness: 700 };
-    // const cursorXSpring = useSpring(cursorX, springConfig);
-    // const cursorYSpring = useSpring(cursorY, springConfig);
-
-    // useEffect(() => {
-    //     const mouseMove = (e) => {
-    //         cursorX.set(e.clientX - 16);
-    //         cursorY.set(e.clientY - 16);
-    //     };
-
-    //     window.addEventListener("mousemove", mouseMove);
-
-    //     return () => {
-    //         window.removeEventListener("mousemove", mouseMove);
-    //     };
-    // }, []);
-
     return (
         <div className="App" data-theme={isOn ? "dark" : "light"}>
-            <ScrollToTop />
-            {/* <motion.div
-                className="cursor"
-                style={{
-                    translateX: cursorXSpring,
-                    translateY: cursorYSpring,
-                }}
-            /> */}
+            {/* <ScrollToTop /> */}
             <ParticlesBackground theme={isOn ? "dark" : "light"} />
             <ToggleTheme isOn={isOn} onToggle={() => setIsOn(!isOn)} />
             <Header theme={isOn ? "dark" : "light"} />
@@ -71,6 +47,7 @@ function App() {
                     <Route path="/blog/:slug" element={<SingleWork />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
             <Footer />

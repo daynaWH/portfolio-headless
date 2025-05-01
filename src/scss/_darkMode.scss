@@ -1,18 +1,6 @@
 @use "variables" as *;
 @use "mixins" as *;
 
-// @media (prefers-color-scheme: dark) {
-//     :root {
-//         color: #213547;
-//         background-color: #ffffff;
-//     }
-//     a:hover {
-//         color: #747bff;
-//     }
-//     button {
-//         background-color: #f9f9f9;
-//     }
-// }
 [data-theme="dark"] {
     color: $bg-color-light;
 
@@ -33,7 +21,8 @@
     .scroll-down-btn,
     .social-icons img,
     .contact-page svg,
-    .site-header.hide .nav-btn {
+    .site-header.hide .nav-btn,
+    .cursor-plane {
         filter: invert(1);
     }
 
@@ -47,9 +36,15 @@
         border: 1px solid $bg-color-light;
     }
 
-    // @include mq-large($tablet) {
-    a:not(a.btn):not(.nav-links a) {
-        color: $bg-color-light;
+    @include mq-large($tablet) {
+        a:not(a.btn) {
+            color: $bg-color-light;
+        }
+
+        .page-not-found a {
+            &:hover {
+                color: $accent-blue;
+            }
+        }
     }
-    // }
 }
