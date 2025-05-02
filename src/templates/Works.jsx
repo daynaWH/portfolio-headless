@@ -63,7 +63,7 @@ function Works() {
                                     <Toolkit ids={post.acf["toolkit"]} />
                                 </div>
                                 <Link
-                                    to={`/blog/${post.slug}`}
+                                    to={`/work/${post.slug}`}
                                     className="btn more-info-btn"
                                 >
                                     More Info

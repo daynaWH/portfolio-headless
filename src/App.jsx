@@ -27,7 +27,7 @@ function App() {
             return "about-page";
         } else if (path === "/contact") {
             return "contact-page";
-        } else if (path.includes("/blog/")) {
+        } else if (path.includes("/work/")) {
             return "single-work-page";
         } else {
             return "page-not-found";
@@ -44,7 +44,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/works" element={<Works />} />
-                    <Route path="/blog/:slug" element={<SingleWork />} />
+                    <Route path="/work/:slug" element={<SingleWork />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="*" element={<NotFound />} />

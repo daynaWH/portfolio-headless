@@ -10,12 +10,16 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
-    // cursor: none;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
     background: #f7f7f7;
-    // min-height: 100vh;
 }
 
 main {

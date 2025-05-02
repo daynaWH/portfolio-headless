@@ -11,7 +11,7 @@ function ProjectCard({ post }) {
                 />
             )}
             <div className="work-basic-info">
-                <Link to={`/blog/${post.slug}`}>
+                <Link to={`/work/${post.slug}`}>
                     <h3>{post.acf["project_title"]}</h3>
                 </Link>
                 <p className="subheading">{post.acf["project_subheading"]}</p>
@@ -19,7 +19,7 @@ function ProjectCard({ post }) {
                     <Toolkit ids={post.acf["toolkit"]} />
                 </div>
 
-                <Link to={`/blog/${post.slug}`} className="btn more-info-btn">
+                <Link to={`/work/${post.slug}`} className="btn more-info-btn">
                     More Info
                 </Link>
             </div>
