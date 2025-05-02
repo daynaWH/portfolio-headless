@@ -1,6 +1,8 @@
+// Loading gif that displays while the components are being rendered
+
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-const Loading = () => {
+function Loading() {
     return (
         <div className="loading-container">
             <DotLottieReact
@@ -14,6 +16,6 @@ const Loading = () => {
             />
         </div>
     );
-};
+}
 
 export default Loading;

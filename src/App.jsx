@@ -1,15 +1,14 @@
+import { useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import Home from "./templates/Home";
-import Works from "./templates/Works";
-import SingleWork from "./templates/SingleWork";
-import Contact from "./templates/Contact";
-import About from "./templates/About";
-import NotFound from "./templates/NotFound";
-import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import Footer from "./components/Footer";
+import PageHome from "./templates/PageHome";
+import PageWorks from "./templates/PageWorks";
+import PageSingleWork from "./templates/PageSingleWork";
+import PageContact from "./templates/PageContact";
+import PageAbout from "./templates/PageAbout";
+import PageNotFound from "./templates/PageNotFound";
 import ParticlesBackground from "./components/ParticlesBackground";
 import ToggleTheme from "./components/ToggleTheme";
 
@@ -39,15 +38,16 @@ function App() {
             <ScrollToTop />
             <ParticlesBackground theme={isOn ? "dark" : "light"} />
             <ToggleTheme isOn={isOn} onToggle={() => setIsOn(!isOn)} />
+
             <Header theme={isOn ? "dark" : "light"} />
             <main id="main" className={getPathName(currentPath)}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/works" element={<Works />} />
-                    <Route path="/work/:slug" element={<SingleWork />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="*" element={<NotFound />} />
+                    <Route path="/" element={<PageHome />} />
+                    <Route path="/works" element={<PageWorks />} />
+                    <Route path="/work/:slug" element={<PageSingleWork />} />
+                    <Route path="/about" element={<PageAbout />} />
+                    <Route path="/contact" element={<PageContact />} />
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </main>
             <Footer />

@@ -1,8 +1,10 @@
+// Work Card that includes featured image, title, subheading, toolkit and more info btn
+
 import FeaturedImage from "./FeaturedImage";
 import Toolkit from "./Toolkit";
 import { Link } from "react-router-dom";
 
-function ProjectCard({ post }) {
+function WorkCard({ post }) {
     return (
         <article className="work-card">
             {post.featured_media !== 0 && post._embedded && (
@@ -12,9 +14,9 @@ function ProjectCard({ post }) {
             )}
             <div className="work-basic-info">
                 <Link to={`/work/${post.slug}`}>
-                    <h3>{post.acf["project_title"]}</h3>
+                    <h3>{post.acf["work_title"]}</h3>
                 </Link>
-                <p className="subheading">{post.acf["project_subheading"]}</p>
+                <p className="subheading">{post.acf["work_subheading"]}</p>
                 <div className="work-card-toolkit">
                     <Toolkit ids={post.acf["toolkit"]} />
                 </div>
@@ -27,4 +29,4 @@ function ProjectCard({ post }) {
     );
 }
 
-export default ProjectCard;
+export default WorkCard;

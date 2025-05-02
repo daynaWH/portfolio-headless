@@ -1,14 +1,15 @@
+// Render collaborators from work details ACF
+
 import { useState, useEffect } from "react";
-// import Loading from "./Loading";
 import { restBase } from "./Utilities";
 
-const Collaborators = ({ ids }) => {
+function Collaborators({ ids }) {
     const restPath = restBase + `tags?include=${ids.join(",")}&_embed`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             const response = await fetch(restPath);
             if (response.ok) {
                 const data = await response.json();
@@ -17,7 +18,7 @@ const Collaborators = ({ ids }) => {
             } else {
                 setLoadStatus(false);
             }
-        };
+        }
         fetchData();
     }, [restPath]);
 
@@ -31,6 +32,6 @@ const Collaborators = ({ ids }) => {
                 ))}
         </>
     );
-};
+}
 
 export default Collaborators;

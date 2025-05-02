@@ -1,5 +1,6 @@
+// Mockup Slider displaying images from ACF Gallery
+
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
 import { restBase } from "./Utilities";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,7 +13,7 @@ function MockupSlider({ ids }) {
     const [direction, setDirection] = useState("null");
 
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             const response = await fetch(restPath);
             if (response.ok) {
                 const data = await response.json();
@@ -21,10 +22,11 @@ function MockupSlider({ ids }) {
             } else {
                 setLoadStatus(false);
             }
-        };
+        }
         fetchData();
     }, [restPath]);
 
+    // Pagination dots for vertical slider
     const handleDotClick = (index) => {
         setDirection(index > activeIndex ? "down" : "up");
         setActiveIndex(index);

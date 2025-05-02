@@ -1,23 +1,18 @@
-import { useState, useEffect, useRef } from "react";
-// import Loading from "./Loading";
+// Display work cards from featured work/other work ACF in Home page and Single Work page, respectively
+
+import { useState, useEffect } from "react";
 import { restBase } from "./Utilities";
-import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
+import WorkCard from "./WorkCard";
 import arrowCarousel from "../assets/arrow-carousel.svg";
 
-function OtherProjects({ ids, isCarousel }) {
+function OtherWorks({ ids, isCarousel }) {
     const restPath = restBase + `posts?include=${ids.join(",")}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
-    const even = restData.length % 2 === 0;
-    const [activeIndex, setActiveIndex] = useState(
-        Math.floor(restData.length / 2)
-    );
-    const [transform, setTransform] = useState(even ? -250 : 0);
-
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             const response = await fetch(restPath);
             if (response.ok) {
                 const data = await response.json();
@@ -26,9 +21,18 @@ function OtherProjects({ ids, isCarousel }) {
             } else {
                 setLoadStatus(false);
             }
-        };
+        }
         fetchData();
     }, [restPath]);
+
+    // Codes to build the carousel were based on the following reference:
+    // https://webtips.dev/animated-carousel-in-react
+
+    const even = restData.length % 2 === 0;
+    const [activeIndex, setActiveIndex] = useState(
+        Math.floor(restData.length / 2)
+    );
+    const [transform, setTransform] = useState(even ? -250 : 0);
 
     useEffect(() => {
         if (restData.length > 0) {
@@ -54,14 +58,13 @@ function OtherProjects({ ids, isCarousel }) {
     return (
         <>
             {isCarousel ? (
-                // Based on the following reference: https://webtips.dev/animated-carousel-in-react
                 <div className="carousel-wrapper">
                     <div
                         className={even ? "carousel even" : "carousel"}
                         style={{ transform: `translateX(${transform}px)` }}
                     >
                         {restData.map((post, index) => (
-                            <ProjectCard
+                            <WorkCard
                                 post={post}
                                 key={post.id}
                                 className={
@@ -96,7 +99,7 @@ function OtherProjects({ ids, isCarousel }) {
                     {restData.map((post, index) => (
                         <motion.div
                             key={post.id}
-                            className="project-card"
+                            className="featured-work"
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{
                                 opacity: 1,
@@ -108,14 +111,13 @@ function OtherProjects({ ids, isCarousel }) {
                             }}
                             viewport={{ once: false, amount: 0.5 }}
                         >
-                            <ProjectCard post={post} />
+                            <WorkCard post={post} />
                         </motion.div>
                     ))}
-                    {/* <ProjectCard key={post.id} post={post} /> */}
                 </>
             )}
         </>
     );
 }
 
-export default OtherProjects;
+export default OtherWorks;

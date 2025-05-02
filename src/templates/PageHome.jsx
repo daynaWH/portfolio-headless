@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
-import OtherProjects from "../components/OtherProjects";
+import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
-import chevronDown from "../assets/chevron-down.svg";
 import { motion } from "framer-motion";
+import Loading from "../components/Loading";
+import OtherWorks from "../components/OtherWorks";
+import chevronDown from "../assets/chevron-down.svg";
 
-function Home() {
+function PageHome() {
     const restPath = restBase + "pages/?slug=home&_embed=1";
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
     const [displayName, setDisplayName] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             const response = await fetch(restPath);
             if (response.ok) {
                 const data = await response.json();
@@ -23,7 +23,7 @@ function Home() {
             } else {
                 setLoadStatus(false);
             }
-        };
+        }
         fetchData();
     }, [restPath]);
 
@@ -32,7 +32,7 @@ function Home() {
             {isLoaded ? (
                 <>
                     <title>Dayna Cho | Portfolio</title>
-                    <section className="home-intro">
+                    <section className="home-landing">
                         <article className="intro">
                             <TypeAnimation
                                 sequence={[
@@ -78,7 +78,7 @@ function Home() {
                             <img
                                 src={chevronDown}
                                 alt="Scroll Down"
-                                className="scroll-down-btn"
+                                className="scroll-down-btn dark-invert"
                             />
                         </a>
                     </section>
@@ -94,18 +94,14 @@ function Home() {
                         viewport={{ once: false, amount: 0.5 }}
                     >
                         <h2>Featured Work</h2>
-                        {/* <div className="featured-works"> */}
-                        <OtherProjects
+                        <OtherWorks
                             ids={restData[0].acf["featured_work"]}
                             isCarousel={false}
                         />
-                        {/* </div> */}
 
-                        {/* <div className="view-all-works"> */}
                         <Link to={"/works"} className="view-all-works">
                             View All Works
                         </Link>
-                        {/* </div> */}
                     </motion.section>
                 </>
             ) : (
@@ -115,4 +111,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default PageHome;

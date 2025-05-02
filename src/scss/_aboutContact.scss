@@ -1,16 +1,17 @@
 @use "variables" as *;
 @use "mixins" as *;
 
-.about-page {
-    // margin-top: 8rem;
-    p {
-        max-width: 80%;
-        margin: 2rem auto;
-    }
+/*---------- About Page ----------*/
 
+.about-page {
     h2,
     h3 {
         text-align: center;
+    }
+
+    .entry-content p {
+        max-width: 80%;
+        margin: 2rem auto;
     }
 
     .toolkit {
@@ -44,27 +45,27 @@
     }
 }
 
-.contact-page {
-    // margin-top: 8rem;
+/*---------- Contact Page ----------*/
 
+.contact-page {
     .entry-content {
         text-align: center;
         margin: 5rem auto;
-    }
-
-    .wp-block-social-links svg {
-        height: 3rem;
-        width: auto;
-
-        #{$link-hover-selector} {
-            fill: $accent-blue;
-        }
     }
 
     .wp-block-social-links {
         display: flex;
         justify-content: center;
         gap: 1rem;
+
+        svg {
+            height: 3rem;
+            width: auto;
+
+            #{$link-hover-selector} {
+                fill: $accent-blue;
+            }
+        }
     }
 
     .wp-block-portfolio-blocks-email-address {
@@ -76,7 +77,7 @@
         margin: 0 auto;
         cursor: pointer;
 
-        &:hover {
+        #{$link-hover-selector} {
             color: $accent-blue;
         }
     }
@@ -95,11 +96,4 @@
         opacity: 1;
         scale: 1;
     }
-}
-
-.contact-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
 }

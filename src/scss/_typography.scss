@@ -6,12 +6,12 @@ button,
 textarea {
     font-family: $body-font;
     color: $primary-color;
-    font-size: 1.125rem;
+    font-size: $default-font-size;
     line-height: $line-height;
 }
 
 h1,
-h2,
+h2:not(.single-work-page .subheading),
 .nav-links a {
     text-transform: uppercase;
 }
@@ -24,7 +24,8 @@ h1 {
     }
 }
 
-h2 {
+h2,
+.work-page h3 {
     font-size: 1.3rem;
 
     @include mq-large($tablet) {
@@ -32,28 +33,38 @@ h2 {
     }
 }
 
-.copyright {
+.typewriter {
+    font-size: 2.5rem;
+    font-weight: $md-font-weight;
+
+    @include mq-large($tablet) {
+        font-size: 3.5rem;
+    }
+}
+
+footer {
     font-size: 1rem;
 }
 
 .single-work-page {
-    // h1,
-    // h2 {
-    //     margin: 0;
-    // }
-}
-
-.about-page .entry-content {
-    h2 {
-        color: $accent-coral;
+    .subheading {
+        font-weight: $md-font-weight;
     }
 }
 
-.hobbies {
-    font-size: 1.5rem;
+.about-page {
+    .entry-content {
+        h2 {
+            color: $accent-coral;
+        }
+    }
 
-    @include mq-large($tablet) {
-        font-size: 2rem;
+    .hobbies {
+        font-size: 1.5rem;
+
+        @include mq-large($tablet) {
+            font-size: 2rem;
+        }
     }
 }
 
@@ -61,15 +72,20 @@ h2 {
 Links
 --------------------------------------------------------------*/
 a {
-    color: #0e1b2f;
+    color: $primary-color;
     text-decoration: none;
 
     #{$link-hover-selector} {
-        color: $primary-color-lower-opacity;
+        color: rgba($primary-color, 0.75);
     }
 }
 
+a,
+button {
+    cursor: pointer;
+}
+
 .nav-links a,
-footer p {
-    font-weight: 500;
+footer {
+    font-weight: $md-font-weight;
 }

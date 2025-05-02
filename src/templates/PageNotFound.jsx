@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 import paperPlane from "../assets/cursor.svg";
 import ErrorImg from "../assets/404-img.svg";
 
-function NotFound() {
+function PageNotFound() {
     return (
         <>
             <h1>404</h1>
             <section>
-                <img src={ErrorImg} alt="Sad Face Icon" className="error-img" />
+                <img
+                    src={ErrorImg}
+                    alt="Sad Face Image"
+                    className="error-img"
+                />
                 <h2>Oops... Page Not Found :(</h2>
                 <p>Seems like this page didn't make the deploy.</p>
                 <p>
@@ -17,7 +21,7 @@ function NotFound() {
                         <img
                             src={paperPlane}
                             alt="Cursor-shaped Paperplane"
-                            className="cursor-plane"
+                            className="cursor-plane dark-invert"
                         />
                     </Link>
                 </p>
@@ -26,4 +30,4 @@ function NotFound() {
     );
 }
 
-export default NotFound;
+export default PageNotFound;

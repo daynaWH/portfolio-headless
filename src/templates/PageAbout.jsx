@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
-import Toolkit from "../components/Toolkit";
 import { TypeAnimation } from "react-type-animation";
+import Loading from "../components/Loading";
+import Toolkit from "../components/Toolkit";
 
-const About = () => {
+function PageAbout() {
     const restPath = restBase + "pages/13?_embed=1";
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             const response = await fetch(restPath);
             if (response.ok) {
                 const data = await response.json();
@@ -19,7 +19,7 @@ const About = () => {
             } else {
                 setLoadStatus(false);
             }
-        };
+        }
         fetchData();
     }, [restPath]);
 
@@ -80,6 +80,6 @@ const About = () => {
             )}
         </>
     );
-};
+}
 
-export default About;
+export default PageAbout;

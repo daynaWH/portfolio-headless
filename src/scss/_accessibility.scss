@@ -32,3 +32,10 @@
 #content[tabindex="-1"]:focus {
     outline: 0;
 }
+
+/* Remove Animate on Scroll if a user's device settings are set to reduced motion. */
+@media (prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}

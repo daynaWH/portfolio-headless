@@ -1,6 +1,7 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+// Layout
 html {
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -16,10 +17,6 @@ html {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-body {
-    background: #f7f7f7;
 }
 
 main {
@@ -56,9 +53,9 @@ h1 {
         position: absolute;
         width: 60%;
         height: 1rem;
-        background-color: $accent-blue;
         bottom: 0.7rem;
         left: -1rem;
+        background-color: $accent-blue;
         z-index: -1;
     }
 
@@ -67,49 +64,28 @@ h1 {
     }
 }
 
+.featured-image img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+.loading-container {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .loading {
     display: block;
     margin: 0 auto;
 }
 
-.featured-image img {
-    display: block;
-    width: 100%;
-    // height: 18.75rem;
-    object-fit: cover;
-}
-
-.btn {
-    border-radius: 0.5rem;
-    background-color: $accent-coral;
-    color: $primary-color;
-    border: none;
-    width: 9.5rem;
-    padding: 0.5rem 0;
-    cursor: pointer;
-    box-shadow: $primary-color-lower-opacity 0px 2px 5px 0px;
-    font-size: 1rem;
-    display: flex;
-    justify-content: center;
-    // text-align: center;
-}
-
-.cursor {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 2rem;
-    width: 2rem;
-    // border-radius: 50%;
-    // background-color: $bg-color-light;
-    // mix-blend-mode: difference;
-    // background-image: url(../assets/cursor.svg);
-    z-index: 2000;
-    pointer-events: none;
-}
-
 .toggle-container {
-    position: fixed;
     top: 1.7rem;
     right: 1rem;
     cursor: pointer;
@@ -127,19 +103,7 @@ video {
     max-width: 100%; /* Adhere to container width. */
 }
 
-.loading-container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-}
-
-@media (prefers-reduced-motion) {
-}
-
+// Not Found Error Page
 .page-not-found {
     section {
         display: flex;
@@ -157,7 +121,7 @@ video {
         gap: 0.5rem;
         text-decoration: underline;
 
-        &:hover {
+        #{$link-hover-selector} {
             color: $accent-blue;
         }
     }

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import Loading from "../components/Loading";
 import { restBase } from "../components/Utilities";
+import Loading from "../components/Loading";
 
-const Contact = () => {
+function PageContact() {
     const restPath = restBase + "pages/15?_embed=1";
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             const response = await fetch(restPath);
             if (response.ok) {
                 const data = await response.json();
@@ -17,7 +17,7 @@ const Contact = () => {
             } else {
                 setLoadStatus(false);
             }
-        };
+        }
         fetchData();
     }, [restPath]);
 
@@ -74,6 +74,6 @@ const Contact = () => {
             )}
         </>
     );
-};
+}
 
-export default Contact;
+export default PageContact;

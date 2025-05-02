@@ -1,14 +1,16 @@
+// Dark/Light theme toggle using framer motion
+
+import { motion } from "framer-motion";
 import sun from "../assets/sun.svg";
 import moon from "../assets/moon.svg";
-import { motion } from "framer-motion";
 
 function ToggleTheme({ isOn, onToggle }) {
     return (
         <motion.div
             className="toggle-container"
             style={{
+                position: "fixed",
                 display: "flex",
-                // justifyContent: isOn ? "flex-end" : "flex-start",
                 justifyContent: "space-around",
                 borderRadius: "2rem",
                 width: "4.5rem",
@@ -19,7 +21,12 @@ function ToggleTheme({ isOn, onToggle }) {
             onClick={() => onToggle(!isOn)}
         >
             {isOn && (
-                <img src={moon} width="20px" style={{ filter: "invert(1)" }} />
+                <img
+                    src={moon}
+                    alt="Moon icon"
+                    width="20px"
+                    style={{ filter: "invert(1)" }}
+                />
             )}
             <motion.div
                 layout
@@ -32,7 +39,7 @@ function ToggleTheme({ isOn, onToggle }) {
                     border: isOn ? "2px solid black" : "2px solid white",
                 }}
             />
-            {!isOn && <img src={sun} width="20px" />}
+            {!isOn && <img src={sun} alt="Sun icon" width="20px" />}
         </motion.div>
     );
 }

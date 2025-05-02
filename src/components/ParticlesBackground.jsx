@@ -1,4 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
+// Customize animated background using tsParticles for both light and dark themes
+
+import { useCallback } from "react";
 import { loadStarsPreset } from "tsparticles-preset-stars";
 import Particles from "react-tsparticles";
 

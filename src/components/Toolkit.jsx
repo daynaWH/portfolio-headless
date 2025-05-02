@@ -1,5 +1,6 @@
+// Render toolkit items added as categories in WP
+
 import { useState, useEffect } from "react";
-// import Loading from "./Loading";
 import { restBase } from "./Utilities";
 import shopifyIcon from "../assets/shopify-icon.svg";
 
@@ -8,22 +9,22 @@ function Toolkit({ ids, isGrouped }) {
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch(restPath);
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //             setData(data);
-    //             setLoadStatus(true);
-    //         } else {
-    //             setLoadStatus(false);
-    //         }
-    //     };
-    //     fetchData();
-    // }, [restPath]);
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch(restPath);
+            if (response.ok) {
+                const data = await response.json();
+                setData(data);
+                setLoadStatus(true);
+            } else {
+                setLoadStatus(false);
+            }
+        }
+        fetchData();
+    }, [restPath]);
 
     useEffect(() => {
-        const fetchAll = async () => {
+        async function fetchAll() {
             try {
                 // Fetch all children of the given parent IDs
                 const allChildren = await Promise.all(
@@ -60,24 +61,33 @@ function Toolkit({ ids, isGrouped }) {
                 console.error("Toolkit fetch failed:", err);
                 setLoadStatus(false);
             }
-        };
+        }
 
         fetchAll();
     }, [ids]);
 
+    // Render tools with the corresponding icons
     function renderTool(tool) {
         return (
             <>
                 {tool.slug === "shopify" ? (
-                    <img src={shopifyIcon} className="shopify-icon" />
+                    <img
+                        src={shopifyIcon}
+                        className="shopify-icon tool-icon"
+                        alt="Shopify Icon"
+                    />
                 ) : (
-                    <i className={`devicon-${tool.slug}-plain colored`}></i>
+                    <i
+                        className={`devicon-${tool.slug}-plain colored tool-icon`}
+                        title={tool.slug}
+                    ></i>
                 )}
                 {tool.name}
             </>
         );
     }
 
+    // Group child tools below their corresponding parent tools
     function groupTools(tools) {
         return tools
             .filter((tool) => tool._children && tool._children.length > 0)
@@ -102,7 +112,11 @@ function Toolkit({ ids, isGrouped }) {
                     {isGrouped
                         ? groupTools(restData)
                         : restData.map((tool) => (
-                              <div key={tool.id} id={`tool-${tool.id}`}>
+                              <div
+                                  key={tool.id}
+                                  id={`tool-${tool.id}`}
+                                  className="tool-item"
+                              >
                                   {renderTool(tool)}
                               </div>
                           ))}

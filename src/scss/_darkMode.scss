@@ -2,12 +2,24 @@
 @use "mixins" as *;
 
 [data-theme="dark"] {
-    color: $bg-color-light;
+    // Global Elements
+    color: $base-color-light;
 
     header {
-        background-color: rgba($bg-color-dark, 0.7);
+        background-color: rgba($base-color-dark, 0.7);
     }
 
+    h1::after {
+        background-color: #21759b;
+    }
+
+    .dark-invert,
+    .site-header.hide .nav-btn,
+    .contact-page svg {
+        filter: invert(1);
+    }
+
+    // Home Page
     .intro {
         background: linear-gradient(to right, white 8px, transparent 8px) 0 0,
             linear-gradient(to left, white 8px, transparent 8px) 100% 100%,
@@ -18,33 +30,33 @@
         background-size: 3rem 3rem;
     }
 
-    .scroll-down-btn,
-    .social-icons img,
-    .contact-page svg,
-    .site-header.hide .nav-btn,
-    .cursor-plane {
-        filter: invert(1);
-    }
-
-    .work-card,
-    .work-toolkit .toolkit,
+    .work-basic-info *,
     .tool-item {
         color: $primary-color;
     }
 
-    .single-work-page .reflection-table {
-        border: 1px solid $bg-color-light;
-    }
-
-    @include mq-large($tablet) {
-        a:not(a.btn) {
-            color: $bg-color-light;
+    // Single Work Page and Work Card
+    .single-work-page {
+        .reflection-table {
+            border: 1px solid $base-color-light;
         }
 
-        .page-not-found a {
-            &:hover {
-                color: $accent-blue;
-            }
+        .other-works .carousel-wrapper .carousel .work-basic-info {
+            background-color: rgba($base-color-light, 0.9);
+        }
+    }
+
+    // Not Found Page
+    .page-not-found a {
+        &:hover {
+            color: $accent-blue;
+        }
+    }
+
+    // Media Query
+    @include mq-large($tablet) {
+        a:not(a.btn) {
+            color: $base-color-light;
         }
     }
 }

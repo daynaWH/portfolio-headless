@@ -1,16 +1,16 @@
 // Typography
 $body-font: "Raleway", sans-serif;
+$default-font-size: 1.125rem;
 $line-height: 1.5;
+$md-font-weight: 500;
 
 // Colors
-$bg-color-light: #f7f7f7;
-$bg-color-dark: #05090f;
+$base-color-light: #f7f7f7;
+$base-color-dark: #05090f;
 $primary-color: #0e1b2f;
-$primary-color-lower-opacity: #0e1b2fbf;
 $secondary-color: #ccd6d4;
 $accent-blue: #99b4bf;
 $accent-coral: #f29979;
-$card-bg: #ccd6d4e6;
 
 // Media Query Breakpoints
 $mobileLarge: 30em;
