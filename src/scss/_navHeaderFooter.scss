@@ -116,7 +116,8 @@
             transition: transform 0.25s ease-out;
         }
 
-        #{$link-hover-selector}::after {
+        #{$link-hover-selector}::after,
+        &:hover::after {
             transform: scaleX(1);
         }
     }
