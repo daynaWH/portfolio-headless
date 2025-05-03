@@ -75,7 +75,7 @@ a {
     color: $primary-color;
     text-decoration: none;
 
-    #{$link-hover-selector} {
+    &:hover {
         color: rgba($primary-color, 0.75);
     }
 }

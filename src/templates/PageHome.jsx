@@ -32,6 +32,10 @@ function PageHome() {
             {isLoaded ? (
                 <>
                     <title>Dayna Cho | Portfolio</title>
+                    <meta
+                        name="description"
+                        content={restData[0].yoast_head_json["description"]}
+                    />
                     <section className="home-landing">
                         <article className="intro">
                             <TypeAnimation

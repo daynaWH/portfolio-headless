@@ -58,7 +58,15 @@ function PageContact() {
         <>
             {isLoaded ? (
                 <>
-                    <title>{`${restData.title.rendered}`}</title>
+                    <title
+                        dangerouslySetInnerHTML={{
+                            __html: restData.yoast_head_json["title"],
+                        }}
+                    ></title>
+                    <meta
+                        name="description"
+                        content={restData.yoast_head_json["description"]}
+                    />
                     <section id={`post-${restData.id}`}>
                         <h1>{restData.title.rendered}</h1>
                         <div

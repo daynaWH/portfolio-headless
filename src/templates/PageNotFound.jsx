@@ -5,6 +5,7 @@ import ErrorImg from "../assets/404-img.svg";
 function PageNotFound() {
     return (
         <>
+            <title>Page Not Found</title>
             <h1>404</h1>
             <section>
                 <img

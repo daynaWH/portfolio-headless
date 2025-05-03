@@ -5,8 +5,10 @@ import Loading from "../components/Loading";
 import WorkCard from "../components/WorkCard";
 
 function PageWorks() {
-    const restPath = restBase + "posts?_embed=1";
+    const restPath = restBase + "pages/11?_embed=1";
+    const workPath = restBase + "posts?_embed=1";
     const [restData, setData] = useState([]);
+    const [workData, setWorkData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
     useEffect(() => {
@@ -23,14 +25,35 @@ function PageWorks() {
         fetchData();
     }, [restPath]);
 
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch(workPath);
+            if (response.ok) {
+                const data = await response.json();
+                setWorkData(data);
+                setLoadStatus(true);
+            } else {
+                setLoadStatus(false);
+            }
+        }
+        fetchData();
+    }, [workPath]);
+
     return (
         <>
             {isLoaded ? (
                 <>
-                    <title>My Work</title>
+                    <title
+                        dangerouslySetInnerHTML={{
+                            __html: restData.yoast_head_json["title"],
+                        }}
+                    ></title>
+                    <meta
+                        name="description"
+                        content={restData.yoast_head_json["description"]}
+                    />
                     <h1>My Work</h1>
-
-                    {restData.map((post, index) => (
+                    {workData.map((post, index) => (
                         <motion.div
                             key={post.id}
                             id={`post-${post.id}`}

@@ -33,6 +33,10 @@ function PageSingleWork() {
             {isLoaded ? (
                 <>
                     <title>{`${restData.acf["work_title"]} | ${restData.title.rendered}`}</title>
+                    <meta
+                        name="description"
+                        content={restData.yoast_head_json["description"]}
+                    />
                     <article id={`post-${restData.id}`}>
                         <h1>{restData.acf["work_title"]}</h1>
                         <h2 className="subheading">

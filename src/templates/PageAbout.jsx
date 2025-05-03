@@ -40,7 +40,15 @@ function PageAbout() {
         <>
             {isLoaded ? (
                 <>
-                    <title>{`${restData.title.rendered}`}</title>
+                    <title
+                        dangerouslySetInnerHTML={{
+                            __html: restData.yoast_head_json["title"],
+                        }}
+                    ></title>
+                    <meta
+                        name="description"
+                        content={restData.yoast_head_json["description"]}
+                    />
                     <h1>{restData.title.rendered}</h1>
                     <div id={`post-${restData.id}`} className="hidden">
                         <article

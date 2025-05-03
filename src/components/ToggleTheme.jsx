@@ -9,12 +9,6 @@ function ToggleTheme({ isOn, onToggle }) {
         <motion.div
             className="toggle-container"
             style={{
-                position: "fixed",
-                display: "flex",
-                justifyContent: "space-around",
-                borderRadius: "2rem",
-                width: "4.5rem",
-                padding: "2px",
                 background: isOn ? "fff" : "000",
                 border: isOn ? "2px solid white" : "2px solid black",
             }}
@@ -32,10 +26,7 @@ function ToggleTheme({ isOn, onToggle }) {
                 layout
                 className="theme-toggle-btn"
                 style={{
-                    height: "2rem",
-                    width: "2rem",
                     background: isOn ? "white" : "black",
-                    borderRadius: "50%",
                     border: isOn ? "2px solid black" : "2px solid white",
                 }}
             />
