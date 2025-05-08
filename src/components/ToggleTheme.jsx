@@ -22,7 +22,7 @@ function ToggleTheme({ isOn, onToggle }) {
                 />
             )}
             <motion.div
-                layout
+                layout="position"
                 className="theme-toggle-btn"
                 style={{
                     background: isOn ? "white" : "black",
