@@ -34,8 +34,12 @@ h2,
 }
 
 .typewriter {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: $md-font-weight;
+
+    @include mq-large($mobileLarge) {
+        font-size: 2.5rem;
+    }
 
     @include mq-large($tablet) {
         font-size: 3.5rem;
@@ -46,10 +50,8 @@ footer {
     font-size: 1rem;
 }
 
-.single-work-page {
-    .subheading {
-        font-weight: $md-font-weight;
-    }
+.subheading {
+    font-weight: $md-font-weight;
 }
 
 .about-page {
@@ -66,6 +68,10 @@ footer {
             font-size: 2rem;
         }
     }
+}
+
+.tool-item {
+    font-size: 1rem;
 }
 
 /*--------------------------------------------------------------
@@ -88,4 +94,13 @@ button {
 .nav-links a,
 footer {
     font-weight: $md-font-weight;
+}
+
+.work-external-links a,
+.more-info-btn {
+    font-size: 1rem;
+
+    @include mq-large($laptop) {
+        font-size: 1.2rem;
+    }
 }

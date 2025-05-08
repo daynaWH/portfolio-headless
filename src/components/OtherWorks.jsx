@@ -45,13 +45,13 @@ function OtherWorks({ ids, isCarousel }) {
     function slide(direction) {
         if (direction === "left" && activeIndex !== 0) {
             setActiveIndex(activeIndex - 1);
-            setTransform(transform + 520);
+            setTransform(transform + 500);
         } else if (
             direction === "right" &&
             activeIndex !== restData.length - 1
         ) {
             setActiveIndex(activeIndex + 1);
-            setTransform(transform - 520);
+            setTransform(transform - 500);
         }
     }
 

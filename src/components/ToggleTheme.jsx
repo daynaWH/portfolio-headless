@@ -9,7 +9,6 @@ function ToggleTheme({ isOn, onToggle }) {
         <motion.div
             className="toggle-container"
             style={{
-                background: isOn ? "fff" : "000",
                 border: isOn ? "2px solid white" : "2px solid black",
             }}
             onClick={() => onToggle(!isOn)}

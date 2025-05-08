@@ -12,6 +12,7 @@ function PageHome() {
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
     const [displayName, setDisplayName] = useState(false);
+    const [displayTitle, setDisplayTitle] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -58,7 +59,11 @@ function PageHome() {
 
                             {displayName && (
                                 <TypeAnimation
-                                    sequence={[restData[0].acf["name"]]}
+                                    sequence={[
+                                        restData[0].acf["name"],
+                                        2000,
+                                        () => setDisplayTitle(true),
+                                    ]}
                                     wrapper="span"
                                     className="typewriter name"
                                     cursor={false}
@@ -69,8 +74,13 @@ function PageHome() {
                                 />
                             )}
                         </article>
+
                         <div
-                            className="intro-title"
+                            className={
+                                displayTitle
+                                    ? "intro-title show"
+                                    : "intro-title hidden"
+                            }
                             dangerouslySetInnerHTML={{
                                 __html: restData[0].acf["intro_title"].replace(
                                     /\\n/g,
@@ -78,6 +88,7 @@ function PageHome() {
                                 ),
                             }}
                         ></div>
+
                         <a href="#featured-work-wrapper">
                             <img
                                 src={chevronDown}
