@@ -6,7 +6,7 @@ function Footer() {
     return (
         <footer>
             <p className="copyright">
-                &copy; {new Date().getFullYear()} | Dayna Cho
+                &copy; Dayna Cho | {new Date().getFullYear()}
             </p>
             <div className="social-icons">
                 <a href="https://www.linkedin.com/in/daynacho/">

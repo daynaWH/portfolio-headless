@@ -47,12 +47,14 @@ function PageSingleWork() {
                             <Link
                                 to={restData.acf["live_site"]}
                                 className="btn"
+                                target="_blank"
                             >
                                 View Live
                             </Link>
                             <Link
                                 to={restData.acf["github_link"]}
                                 className="btn"
+                                target="_blank"
                             >
                                 GitHub
                             </Link>
