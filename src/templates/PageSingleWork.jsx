@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { restBase } from "../components/Utilities";
 import { useParams, Link } from "react-router-dom";
-import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
+import { motion, AnimatePresence } from "framer-motion";
 import Loading from "../components/Loading";
 import OtherWorks from "../components/OtherWorks";
 import Toolkit from "../components/Toolkit";
 import Collaborators from "../components/Collaborators";
 import MockupSlider from "../components/MockupSlider";
+import chevronDown from "../assets/chevron-down.svg";
 
 function PageSingleWork() {
     const { slug } = useParams();
     const restPath = restBase + `posts?slug=${slug}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
+    const [expandedSections, setExpandedSections] = useState({});
 
     useEffect(() => {
         async function fetchData() {
@@ -28,9 +30,66 @@ function PageSingleWork() {
         fetchData();
     }, [restPath]);
 
+    const toggleSection = (sectionIndex, sectionType) => {
+        const key = `${sectionIndex}-${sectionType}`;
+        setExpandedSections((prev) => ({
+            ...prev,
+            [key]: !prev[key],
+        }));
+    };
+
+    const AccordionSection = ({
+        title,
+        content,
+        sectionIndex,
+        sectionType,
+    }) => {
+        const key = `${sectionIndex}-${sectionType}`;
+        const isExpanded = expandedSections[key];
+
+        return (
+            <div className="accordion-section">
+                <button
+                    className="accordion-header"
+                    onClick={() => toggleSection(sectionIndex, sectionType)}
+                >
+                    <h3>{title}</h3>
+                    <motion.span
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="accordion-arrow"
+                    >
+                        <img
+                            src={chevronDown}
+                            alt="Scroll Down"
+                            className="accordion-toggle-arrow"
+                        />
+                    </motion.span>
+                </button>
+                <AnimatePresence>
+                    {isExpanded && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="accordion-content"
+                        >
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: content,
+                                }}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        );
+    };
+
     return (
         <>
-            {isLoaded ? (
+            {isLoaded && restData && restData.acf ? (
                 <>
                     <title>{`${restData.acf["work_title"]} | ${restData.title.rendered}`}</title>
                     <meta
@@ -83,43 +142,32 @@ function PageSingleWork() {
                                 }}
                             ></div>
                         </div>
+
                         {restData.acf["project_insight"].map(
                             (section, index) => (
-                                <Tabs
+                                <div
                                     key={index}
-                                    className={"reflection-table work-content"}
+                                    className={"project-details work-content"}
                                 >
-                                    <TabList className="tablist">
-                                        <Tab className="submenu">
-                                            Requirements
-                                        </Tab>
-                                        <Tab className="submenu">Features</Tab>
-                                        <Tab className="submenu">
-                                            Reflection
-                                        </Tab>
-                                    </TabList>
-                                    <TabPanel>
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: section["requirements"],
-                                            }}
-                                        ></div>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: section["features"],
-                                            }}
-                                        ></div>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: section["reflection"],
-                                            }}
-                                        ></div>
-                                    </TabPanel>
-                                </Tabs>
+                                    <AccordionSection
+                                        title="The Challenge"
+                                        content={section["requirements"]}
+                                        sectionIndex={index}
+                                        sectionType="challenge"
+                                    />
+                                    <AccordionSection
+                                        title="My Solution"
+                                        content={section["features"]}
+                                        sectionIndex={index}
+                                        sectionType="solution"
+                                    />
+                                    <AccordionSection
+                                        title="Technical Highlights"
+                                        content={section["reflection"]}
+                                        sectionIndex={index}
+                                        sectionType="highlights"
+                                    />
+                                </div>
                             )
                         )}
                         <div className="other-works">

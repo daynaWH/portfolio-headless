@@ -7,7 +7,7 @@ import WorkCard from "../components/WorkCard";
 function PageWorks() {
     const restPath = restBase + "pages/11?_embed=1";
     const workPath = restBase + "posts?_embed=1";
-    const [restData, setData] = useState([]);
+    const [restData, setData] = useState(null);
     const [workData, setWorkData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
@@ -41,7 +41,7 @@ function PageWorks() {
 
     return (
         <>
-            {isLoaded ? (
+            {isLoaded && restData && restData.yoast_head_json ? (
                 <>
                     <title
                         dangerouslySetInnerHTML={{

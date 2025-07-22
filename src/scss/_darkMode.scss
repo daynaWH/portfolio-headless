@@ -37,8 +37,26 @@
 
     // Single Work Page and Work Card
     .single-work-page {
-        .reflection-table {
-            border: 1px solid $base-color-light;
+        .accordion-header {
+            background: $secondary-color;
+            color: $primary-color;
+
+            .accordion-toggle-arrow {
+                filter: none;
+            }
+
+            &:hover {
+                background: rgba($secondary-color, 0.5);
+                color: $base-color-light;
+
+                .accordion-toggle-arrow {
+                    filter: invert(1);
+                }
+            }
+        }
+
+        .accordion-content {
+            background-color: rgba($primary-color, 0.8);
         }
 
         .other-works .carousel-wrapper .carousel .work-basic-info {

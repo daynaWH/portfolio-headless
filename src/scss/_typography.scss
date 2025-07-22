@@ -18,24 +18,41 @@ h2:not(.single-work-page .subheading),
 
 h1 {
     font-size: 2.5rem;
+    margin: 0;
 
     @include mq-large($tablet) {
         font-size: 3rem;
     }
 }
 
-h2,
-.work-page h3 {
-    font-size: 1.3rem;
+h2 {
+    font-size: 1.2rem;
 
     @include mq-large($tablet) {
-        font-size: 2rem;
+        font-size: 1.7rem;
     }
 }
 
+h3 {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
 .typewriter {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: $md-font-weight;
+
+    @include mq-large($mobileLarge) {
+        font-size: 2rem;
+    }
+
+    @include mq-large($tablet) {
+        font-size: 2.5rem;
+    }
+}
+
+.typewriter.name {
+    font-size: 2rem;
 
     @include mq-large($mobileLarge) {
         font-size: 2.5rem;
@@ -47,7 +64,7 @@ h2,
 }
 
 footer {
-    font-size: 1rem;
+    font-size: $default-font-size;
 }
 
 .subheading {
@@ -71,7 +88,7 @@ footer {
 }
 
 .tool-item {
-    font-size: 1rem;
+    font-size: $smaller-font-size;
 }
 
 /*--------------------------------------------------------------
@@ -98,9 +115,9 @@ footer {
 
 .work-external-links a,
 .more-info-btn {
-    font-size: 1rem;
+    font-size: $default-font-size;
+}
 
-    @include mq-large($laptop) {
-        font-size: 1.2rem;
-    }
+.more-info-btn {
+    font-size: $smaller-font-size;
 }
