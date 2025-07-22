@@ -82,7 +82,7 @@ function Toolkit({ ids, isGrouped }) {
                         title={tool.slug}
                     ></i>
                 )}
-                {tool.name}
+                <span className="tool-name">{tool.name}</span>
             </>
         );
     }

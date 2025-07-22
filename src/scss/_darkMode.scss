@@ -19,6 +19,10 @@
         filter: invert(1);
     }
 
+    .view-all-works {
+        color: $base-color-light;
+    }
+
     // Home Page
     .intro {
         background: linear-gradient(to right, white 8px, transparent 8px) 0 0,
@@ -37,6 +41,11 @@
 
     // Single Work Page and Work Card
     .single-work-page {
+        .hero-slider .slider-counter {
+            background: rgba($base-color-light, 0.8);
+            color: $base-color-dark;
+        }
+
         .accordion-header {
             background: $secondary-color;
             color: $primary-color;

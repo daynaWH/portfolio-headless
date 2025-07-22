@@ -18,10 +18,11 @@ h2:not(.single-work-page .subheading),
 
 h1 {
     font-size: 2.5rem;
-    margin: 0;
+    margin: 0 1rem;
 
     @include mq-large($tablet) {
         font-size: 3rem;
+        margin-left: 0;
     }
 }
 
@@ -67,7 +68,9 @@ footer {
     font-size: $default-font-size;
 }
 
-.subheading {
+.single-work-page h2.subheading,
+.other-works h3,
+.work-card h3 {
     font-weight: $md-font-weight;
 }
 
@@ -79,10 +82,10 @@ footer {
     }
 
     .hobbies {
-        font-size: 1.5rem;
+        font-size: 1rem;
 
         @include mq-large($tablet) {
-            font-size: 2rem;
+            font-size: 1.2rem;
         }
     }
 }
