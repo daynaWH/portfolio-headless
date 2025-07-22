@@ -1,10 +1,10 @@
 // Mockup Slider displaying images from ACF Gallery
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { restBase } from "./Utilities";
 import { motion, AnimatePresence } from "framer-motion";
 
-function MockupSlider({ ids, autoPlay = false, autoPlayInterval = 4000 }) {
+function MockupSlider({ ids }) {
     const restPath =
         restBase + `media?include=${ids.join(",")}&order=asc&_embed=1`;
     const [restData, setData] = useState([]);
@@ -62,7 +62,7 @@ function MockupSlider({ ids, autoPlay = false, autoPlayInterval = 4000 }) {
         if (!touchStartX.current || !touchEndX.current) return;
 
         const distance = touchStartX.current - touchEndX.current;
-        const threshold = 50; // Minimum swipe distance
+        const threshold = 50;
 
         if (Math.abs(distance) > threshold) {
             if (distance > 0) {
@@ -132,7 +132,6 @@ function MockupSlider({ ids, autoPlay = false, autoPlayInterval = 4000 }) {
                                 scale: { duration: 0.3 },
                             }}
                             drag="x"
-                            // dragConstraints={{ left: 0, right: 0 }}
                             onDragStart={() => setIsDragging(true)}
                             onDragEnd={(e, { offset }) => {
                                 setIsDragging(false);
@@ -181,44 +180,6 @@ function MockupSlider({ ids, autoPlay = false, autoPlayInterval = 4000 }) {
                         </motion.figure>
                     </AnimatePresence>
 
-                    {/* Navigation arrows for desktop */}
-                    {/* {restData.length > 1 && (
-                        <>
-                            <button
-                                className="slider-nav slider-nav-prev"
-                                onClick={goToPrev}
-                            >
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <polyline points="15,18 9,12 15,6"></polyline>
-                                </svg>
-                            </button>
-                            <button
-                                className="slider-nav slider-nav-next"
-                                onClick={goToNext}
-                                aria-label="Next image"
-                                type="button"
-                            >
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <polyline points="9,18 15,12 9,6"></polyline>
-                                </svg>
-                            </button>
-                        </>
-                    )} */}
-
                     {/* Pagination dots */}
                     {restData.length > 1 && (
                         <div className="slider-pagination">
@@ -235,22 +196,6 @@ function MockupSlider({ ids, autoPlay = false, autoPlayInterval = 4000 }) {
                             ))}
                         </div>
                     )}
-
-                    {/* Progress bar (optional) */}
-                    {/* {autoPlay && (
-                        <div className="slider-progress">
-                            <motion.div
-                                className="slider-progress-bar"
-                                initial={{ width: "0%" }}
-                                animate={{ width: "100%" }}
-                                transition={{
-                                    duration: autoPlayInterval / 1000,
-                                    ease: "linear",
-                                }}
-                                key={activeIndex}
-                            />
-                        </div>
-                    )} */}
 
                     {/* Image counter */}
                     <div className="slider-counter">

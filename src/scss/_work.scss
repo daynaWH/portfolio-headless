@@ -301,16 +301,22 @@
 
     // External link buttons
     .work-external-links {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin: 1rem;
+        .external-links-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem;
 
-        a {
-            #{$link-hover-selector} {
-                background-color: $primary-color;
-                color: $accent-coral;
+            a {
+                #{$link-hover-selector} {
+                    background-color: $primary-color;
+                    color: $accent-coral;
+                }
             }
+        }
+
+        .site-pw-wrapper {
+            text-align: center;
         }
     }
 
@@ -600,14 +606,6 @@
         }
     }
 
-    .tool-name {
-        display: none;
-
-        @include mq-large($tablet) {
-            display: inline-block;
-        }
-    }
-
     .tool-icon {
         vertical-align: bottom;
         font-size: 1.3rem;
@@ -616,6 +614,26 @@
         @include mq-large($tablet) {
             margin: 0 0.5rem 0 1rem;
         }
+    }
+
+    [role="tooltip"] {
+        @include mq-small($tablet) {
+            visibility: hidden;
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 0.8rem;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            border-radius: 0.5rem;
+        }
+    }
+
+    [aria-describedby]:hover + [role="tooltip"],
+    [aria-describedby]:focus + [role="tooltip"] {
+        visibility: visible;
     }
 }
 

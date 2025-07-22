@@ -75,14 +75,22 @@ function Toolkit({ ids, isGrouped }) {
                         src={shopifyIcon}
                         className="shopify-icon tool-icon"
                         alt="Shopify Icon"
+                        aria-describedby={`tooltip-${tool.id}`}
                     />
                 ) : (
                     <i
                         className={`devicon-${tool.slug}-plain colored tool-icon`}
                         title={tool.slug}
+                        aria-describedby={`tooltip-${tool.id}`}
                     ></i>
                 )}
-                <span className="tool-name">{tool.name}</span>
+                <span
+                    role="tooltip"
+                    id={`tooltip-${tool.id}`}
+                    className="tool-name"
+                >
+                    {tool.name}
+                </span>
             </>
         );
     }

@@ -103,20 +103,32 @@ function PageSingleWork() {
                         </h2>
                         <MockupSlider ids={restData.acf["mockup_images"]} />
                         <div className="work-external-links">
-                            <Link
-                                to={restData.acf["live_site"]}
-                                className="btn"
-                                target="_blank"
-                            >
-                                View Live
-                            </Link>
-                            <Link
-                                to={restData.acf["github_link"]}
-                                className="btn"
-                                target="_blank"
-                            >
-                                GitHub
-                            </Link>
+                            <div className="external-links-btns">
+                                <Link
+                                    to={restData.acf["live_site"]}
+                                    className="btn"
+                                    target="_blank"
+                                >
+                                    View Live
+                                </Link>
+                                <Link
+                                    to={restData.acf["github_link"]}
+                                    className="btn"
+                                    target="_blank"
+                                >
+                                    GitHub
+                                </Link>
+                            </div>
+                            <div className="site-pw-wrapper">
+                                {restData.acf["site_password"] && (
+                                    <p className="site-pw">
+                                        Live site password:{" "}
+                                        <code>
+                                            {restData.acf["site_password"]}
+                                        </code>
+                                    </p>
+                                )}
+                            </div>
                         </div>
                         <div className="toolkit-collaborators-wrapper work-content">
                             <div className="work-toolkit work-content">
@@ -150,22 +162,26 @@ function PageSingleWork() {
                                     className={"project-details work-content"}
                                 >
                                     <AccordionSection
-                                        title="The Challenge"
-                                        content={section["requirements"]}
+                                        title="Technical Implementation"
+                                        content={
+                                            section["technical_implementation"]
+                                        }
                                         sectionIndex={index}
-                                        sectionType="challenge"
+                                        sectionType="implementation"
                                     />
                                     <AccordionSection
-                                        title="My Solution"
-                                        content={section["features"]}
+                                        title="Key Features"
+                                        content={section["key_features"]}
                                         sectionIndex={index}
-                                        sectionType="solution"
+                                        sectionType="features"
                                     />
                                     <AccordionSection
-                                        title="Technical Highlights"
-                                        content={section["reflection"]}
+                                        title="Development Insights"
+                                        content={
+                                            section["development_insights"]
+                                        }
                                         sectionIndex={index}
-                                        sectionType="highlights"
+                                        sectionType="insights"
                                     />
                                 </div>
                             )
