@@ -10,7 +10,7 @@ import ProjectDetailsAccordion from "../components/ProjectDetailsAccordion";
 
 function PageSingleWork() {
     const { slug } = useParams();
-    const restPath = restBase + `posts?slug=${slug}`;
+    const restPath = restBase + `posts?slug=${slug}&_embed=1`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
@@ -71,7 +71,13 @@ function PageSingleWork() {
                                 )}
                             </div>
                         </div>
-                        <div className="toolkit-collaborators-wrapper work-content">
+                        <div
+                            className={
+                                restData.acf["site_password"]
+                                    ? " toolkit-collaborators-wrapper work-content has-pw"
+                                    : "toolkit-collaborators-wrapper work-content no-pw"
+                            }
+                        >
                             <div className="work-toolkit work-content">
                                 <h2>Toolkit</h2>
                                 <Toolkit ids={restData.acf["toolkit"]} />

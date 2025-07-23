@@ -116,7 +116,7 @@
 
 .single-work-page {
     .work-content {
-        margin: 3rem 1rem;
+        margin: 2rem 1rem;
 
         h2 {
             margin-top: 0;
@@ -129,8 +129,8 @@
         @include mq-large($tablet) {
             margin: 3rem auto;
 
-            h2 {
-                margin-top: revert;
+            .collaborators h2 {
+                margin-top: 0;
             }
         }
     }
@@ -259,10 +259,11 @@
 
             // Horizontal layout on desktop
             @include mq-large($mobileLarge) {
-                flex-direction: column;
-                right: 1rem;
-                top: 50%;
-                transform: translateX(100%);
+                // flex-direction: column;
+                // right: 1rem;
+                // top: 50%;
+                // transform: translateX(100%);
+                bottom: 0;
             }
         }
 
@@ -320,7 +321,7 @@
         }
     }
 
-    // Toolkit used for the project
+    // Toolkit & Collaborators of the project
     .work-toolkit .toolkit {
         justify-content: start;
     }
@@ -331,6 +332,10 @@
 
         *:not(h2) {
             margin: 0;
+        }
+
+        &.has-pw {
+            margin-top: 0;
         }
 
         @include mq-small($mobileLarge) {
@@ -631,7 +636,6 @@
     justify-content: center;
     column-gap: 1rem;
     row-gap: 0.5rem;
-    margin: 0 2rem;
     cursor: default;
 
     .tool-item {
