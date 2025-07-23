@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { restBase } from "../components/Utilities";
 import { useParams, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import Loading from "../components/Loading";
 import OtherWorks from "../components/OtherWorks";
 import Toolkit from "../components/Toolkit";
 import Collaborators from "../components/Collaborators";
 import MockupSlider from "../components/MockupSlider";
-import chevronDown from "../assets/chevron-down.svg";
+import ProjectDetailsAccordion from "../components/ProjectDetailsAccordion";
 
 function PageSingleWork() {
     const { slug } = useParams();
-    const restPath = restBase + `posts?slug=${slug}&_embed=1`;
+    const restPath = restBase + `posts?slug=${slug}`;
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
-    const [expandedSections, setExpandedSections] = useState({});
 
     useEffect(() => {
         async function fetchData() {
@@ -29,63 +27,6 @@ function PageSingleWork() {
         }
         fetchData();
     }, [restPath]);
-
-    const toggleSection = (sectionIndex, sectionType) => {
-        const key = `${sectionIndex}-${sectionType}`;
-        setExpandedSections((prev) => ({
-            ...prev,
-            [key]: !prev[key],
-        }));
-    };
-
-    const AccordionSection = ({
-        title,
-        content,
-        sectionIndex,
-        sectionType,
-    }) => {
-        const key = `${sectionIndex}-${sectionType}`;
-        const isExpanded = expandedSections[key];
-
-        return (
-            <div className="accordion-section">
-                <button
-                    className="accordion-header"
-                    onClick={() => toggleSection(sectionIndex, sectionType)}
-                >
-                    <h3>{title}</h3>
-                    <motion.span
-                        animate={{ rotate: isExpanded ? 180 : 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="accordion-arrow"
-                    >
-                        <img
-                            src={chevronDown}
-                            alt="Scroll Down"
-                            className="accordion-toggle-arrow"
-                        />
-                    </motion.span>
-                </button>
-                <AnimatePresence>
-                    {isExpanded && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="accordion-content"
-                        >
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: content,
-                                }}
-                            />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        );
-    };
 
     return (
         <>
@@ -155,37 +96,10 @@ function PageSingleWork() {
                             ></div>
                         </div>
 
-                        {restData.acf["project_insight"].map(
-                            (section, index) => (
-                                <div
-                                    key={index}
-                                    className={"project-details work-content"}
-                                >
-                                    <AccordionSection
-                                        title="Technical Implementation"
-                                        content={
-                                            section["technical_implementation"]
-                                        }
-                                        sectionIndex={index}
-                                        sectionType="implementation"
-                                    />
-                                    <AccordionSection
-                                        title="Key Features"
-                                        content={section["key_features"]}
-                                        sectionIndex={index}
-                                        sectionType="features"
-                                    />
-                                    <AccordionSection
-                                        title="Development Insights"
-                                        content={
-                                            section["development_insights"]
-                                        }
-                                        sectionIndex={index}
-                                        sectionType="insights"
-                                    />
-                                </div>
-                            )
-                        )}
+                        <ProjectDetailsAccordion
+                            project={restData.acf["project_insight"]}
+                        />
+
                         <div className="other-works">
                             <h2>View Other Works</h2>
                             <OtherWorks

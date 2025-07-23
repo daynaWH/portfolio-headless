@@ -385,6 +385,54 @@
         }
     }
 
+    // Flexible Content Styles
+    .flexible-content-text {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .flexible-content-gallery {
+        margin-bottom: 2rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .gallery-caption {
+            font-style: italic;
+            color: rgba($primary-color, 0.8);
+            margin-bottom: 1rem;
+            font-size: $default-font-size;
+        }
+
+        .image-gallery {
+            .gallery-image {
+                width: 100%;
+                height: auto;
+                margin: 1rem auto;
+                display: block;
+                box-shadow: 0.15rem 0.15rem 0.3rem rgba($accent-coral, 0.5);
+                transition: box-shadow 0.3s ease;
+
+                &:hover {
+                    box-shadow: 0 0.3rem 0.5rem rgba($accent-coral, 1);
+                }
+
+                @include mq-large($mobileLarge) {
+                    width: 90%;
+                }
+            }
+
+            @include mq-large($laptop) {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(15rem, 1fr));
+            }
+        }
+    }
+
     // View Other Works carousel
     .other-works {
         text-align: center;
