@@ -66,6 +66,10 @@
 
         .accordion-content {
             background-color: rgba($primary-color, 0.8);
+
+            .gallery-caption {
+                color: rgba($base-color-light, 0.8);
+            }
         }
 
         .other-works .carousel-wrapper .carousel .work-basic-info {

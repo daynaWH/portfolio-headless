@@ -67,15 +67,15 @@ function PageAbout() {
                     </div>
                     <TypeAnimation
                         sequence={[
-                            "When I'm not coding, I'm probably travelling",
+                            "When I'm not coding, I'm probably travelling ✈️",
                             1000,
-                            "When I'm not coding, I also play guitar",
+                            "When I'm not coding, I also play guitar 🎸",
                             1000,
                             "When I'm not coding, I like snowboarding when there's ❄️",
                             1000,
-                            "When I'm not coding, I also like longboarding",
+                            "When I'm not coding, I also like longboarding 🛹",
                             1000,
-                            "When I'm not coding, I try to knit as well!",
+                            "When I'm not coding, I try to knit as well 🧶",
                             1000,
                         ]}
                         speed={30}
