@@ -74,32 +74,23 @@ function ProjectDetailsAccordion({ project }) {
                                             `Design process ${index + 1}`
                                         }
                                         className="gallery-image"
-                                        width={
-                                            image.media_details.sizes.full
-                                                ?.width
-                                        }
-                                        height={
-                                            image.media_details.sizes.full
-                                                ?.height
-                                        }
-                                        srcSet={`${image.source_url} ${
-                                            image.media_details.sizes.full
-                                                ?.width
-                                        }w,
-                                                ${
-                                                    image.media_details.sizes
-                                                        .large?.source_url ?? ""
-                                                } 1024w,
-                                                ${
-                                                    image.media_details.sizes
-                                                        .medium_large
-                                                        ?.source_url ?? ""
-                                                } 768w,
-                                                ${
-                                                    image.media_details.sizes
-                                                        .medium?.source_url ??
-                                                    ""
-                                                } 300w`}
+                                        width={image.media_details?.width}
+                                        height={image.media_details?.height}
+                                        srcSet={[
+                                            image.source_url &&
+                                                `${image.source_url} ${image.media_details?.width}w`,
+                                            image.media_details?.sizes?.large
+                                                ?.source_url &&
+                                                `${image.media_details.sizes.large.source_url} 1024w`,
+                                            image.media_details?.sizes
+                                                ?.medium_large?.source_url &&
+                                                `${image.media_details.sizes.medium_large.source_url} 768w`,
+                                            image.media_details?.sizes?.medium
+                                                ?.source_url &&
+                                                `${image.media_details.sizes.medium.source_url} 300w`,
+                                        ]
+                                            .filter(Boolean)
+                                            .join(", ")}
                                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     />
                                 ))
